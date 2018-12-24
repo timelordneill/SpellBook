@@ -9,11 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.example.spellbook.R
+import com.example.spellbook.domain.Spell
+import kotlinx.android.synthetic.main.fragment_spell_detail.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -24,18 +24,11 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  *
  */
-class SpellDetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
+class SpellDetailFragment : android.support.v4.app.Fragment() {
 
+    private lateinit var spell: Spell
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -43,61 +36,24 @@ class SpellDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_spell_detail, container, false)
-    }
+        val rootView=inflater.inflate(R.layout.fragment_spell_detail, container, false)
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+        spell.let {
+            rootView.text_title.text=it.name
+            rootView.text_type.text=it.type
+            rootView.text_time.text=it.casting_time
+            rootView.text_range.text=it.range
+            rootView.text_components.text=it.components.raw
+            rootView.text_duration.text=it.duration
+            rootView.text_desc.text=it.description
+            rootView.text_classes.text=it.classes.toString().replace("[", "").replace("]", "")
         }
+
+        return rootView
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
+    fun addObject(item: Spell){
+        this.spell = item
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SpellDetailFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SpellDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,6 +51,15 @@ class SpellListFragment : Fragment() {
             spell_list.adapter = SimpleItemRecyclerViewAdapter(this, it!!)
         })
 
-        spell_list.layoutManager=LinearLayoutManager(activity)
+        spell_list.layoutManager= LinearLayoutManager(activity)
+    }
+
+    fun showDetail(spell: Spell){
+        val detailFragment = SpellDetailFragment()
+        this.fragmentManager!!.beginTransaction()
+            .replace(R.id.list_frame, detailFragment)
+            .addToBackStack(null)
+            .commit()
+        detailFragment.addObject(spell)
     }
 }

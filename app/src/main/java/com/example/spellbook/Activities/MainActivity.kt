@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.spellbook.Fragments.SpellListFragment
 import com.example.spellbook.R
+import com.example.spellbook.domain.Spell
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
