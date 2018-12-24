@@ -7,6 +7,15 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 28
+
+    dataBinding {
+        enabled = true
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
     defaultConfig {
         applicationId "com.example.spellbook"
         minSdkVersion 15
@@ -34,6 +43,54 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.google.firebase:firebase-database:16.0.1'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
+
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+
+    //OkHttp
+    implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$versions.okHttp"
+    // LiveData & ViewModel
+    implementation "android.arch.lifecycle:extensions:$versions.architecture"
+    // Data binding
+    annotationProcessor "com.android.databinding:compiler:3.1.4"
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    implementation "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
+
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:$versions.rx"
+    implementation "io.reactivex.rxjava2:rxandroid:$versions.rxandroid"
+
+    implementation "com.squareup.moshi:moshi-kotlin:$versions.moshi"
+    //implementation "se.ansman.kotshi:api:$versions.kotshi"
+    //implementation "se.ansman.kotshi:compiler:$versions.kotshi"
+
+    // Anko
+    implementation 'org.jetbrains.anko:anko-common:0.10.4'
+
+    implementation "com.google.dagger:dagger:$versions.dagger"
+    implementation "com.google.dagger:dagger-android-support:$versions.dagger"
+
+
+    // Adds the annotation processor dependency to the annotation processor classpath.
+    //Android Studio by default will not allow you to navigate to generated Dagger 2
+    // code as legitimate classes because they are not normally added to the source path.
+    // Adding the annotationProcessor plugin will add these files into the IDE classpath
+    // and enable you to have more visibility.
+    annotationProcessor "com.google.dagger:dagger-compiler:$versions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$versions.dagger"
+    kapt 'com.google.dagger:dagger-android-processor:2.15'
+    kapt 'com.google.dagger:dagger-compiler:2.15'
+
+    //Logger functionality with beautifull logging : https://github.com/orhanobut/logger
+    implementation 'com.orhanobut:logger:2.2.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'

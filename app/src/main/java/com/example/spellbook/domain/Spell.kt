@@ -1,6 +1,22 @@
 package com.example.spellbook.domain
 
-class Spell(val name: String, val level: Int, val shool: String, val source: String, val page: Int, val entries: List<String>,
-            val entriesHigherLevel: List<String>,val time:List<Time>, val range: Range, val components: Components,
-            val classes: Classes, val duration: Duration, val meta: Meta, val scalingeffects: Boolean) {
-}
+import android.os.Parcelable
+import com.example.spellbook.injection.component.ViewModelComponent
+import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+class Spell (@field:Json(name = "name")val name: String,
+             @field:Json(name = "description")val description: String,
+             @field:Json(name = "range")val range: String,
+             @field:Json(name = "components")val components: Components,
+             @field:Json(name = "ritual")val ritual: Boolean,
+             @field:Json(name = "duration")val duration: String,
+             @field:Json(name = "concentration")val concentration: Boolean,
+             @field:Json(name = "casting_time")val casting_time: String,
+             @field:Json(name = "level")val level: String,
+             @field:Json(name = "school")val school: String,
+             @field:Json(name = "classes")val classes: List<String>,
+             @field:Json(name = "tags")val tags: List<String>,
+             @field:Json(name = "type")val type: String) : Parcelable
+
