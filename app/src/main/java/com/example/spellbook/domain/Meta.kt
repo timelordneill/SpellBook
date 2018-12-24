@@ -1,4 +1,4 @@
 package com.example.spellbook.domain
 
-class Meta {
+class Meta(val concentration: Boolean) {
 }

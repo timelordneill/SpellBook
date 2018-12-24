@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "365770347645",
+    "firebase_url": "https://spellbook-bacf4.firebaseio.com",
+    "project_id": "spellbook-bacf4",
+    "storage_bucket": "spellbook-bacf4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365770347645:android:e15456914d1bbd77",
+        "android_client_info": {
+          "package_name": "com.example.spellbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "365770347645-47nfuk00pvl8l06ni56v93lac1sbnoqj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.spellbook",
+            "certificate_hash": "20e85cd745e586714e236e3111539ae66a17db5d"
+          }
+        },
+        {
+          "client_id": "365770347645-90msqah0srbgheibcmq6fhs2li4v0331.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwn0vgff2DAZtno2EHzeTL64u7F1fSi6k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "365770347645-90msqah0srbgheibcmq6fhs2li4v0331.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

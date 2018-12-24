@@ -1,4 +1,4 @@
 package com.example.spellbook.domain
 
-class Range {
+class Range(val type: String, val distance: Distance) {
 }

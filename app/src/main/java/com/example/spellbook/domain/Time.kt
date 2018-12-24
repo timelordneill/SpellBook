@@ -1,4 +1,4 @@
 package com.example.spellbook.domain
 
-class Time {
+class Time(val number: Int, val unit: String) {
 }

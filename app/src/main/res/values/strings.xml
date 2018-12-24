@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">SpellBook</string>
+
+    <string name="spell">Acid Splash</string>
+
+    <string name="level">0</string>
+
+    <string name="page">221</string>
+
+    <string name="scaling">true</string>
+
+    <string name="school">C</string>
+
+    <string name="source">PHB</string>
+
+    <string name="classe1">Sorcerer</string>
+
+    <string name="classe2">Wizard</string>
+
 </resources>

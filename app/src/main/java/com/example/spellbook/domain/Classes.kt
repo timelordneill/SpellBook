@@ -1,4 +1,4 @@
 package com.example.spellbook.domain
 
-class Classes {
+class Classes(val fromClassList: List<Class>, fromSubclass: List<Class>) {
 }

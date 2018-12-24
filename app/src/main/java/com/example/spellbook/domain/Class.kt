@@ -1,4 +1,4 @@
 package com.example.spellbook.domain
 
-class Class {
+class Class(val name: String, val source: String) {
 }

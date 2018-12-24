@@ -1,4 +1,4 @@
 package com.example.spellbook.domain
 
-class Components {
+class Components(val v:Boolean, val s: Boolean, val m:String) {
 }
