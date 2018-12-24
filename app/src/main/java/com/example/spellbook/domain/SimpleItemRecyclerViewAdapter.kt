@@ -17,6 +17,9 @@ class SimpleItemRecyclerViewAdapter(private val parentActivity: SpellListFragmen
 
     private val onClickListener: View.OnClickListener
 
+    /**
+     * initializes the onclick listener that takes the user to the detail screen
+     */
     init {
         onClickListener = View.OnClickListener { v ->
 
@@ -31,6 +34,10 @@ class SimpleItemRecyclerViewAdapter(private val parentActivity: SpellListFragmen
         return ViewHolder(view)
     }
 
+    /**
+     * fills the items in the list
+     * Puts Cantrip in stead of lvl 0 spell
+     */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val spell = spells[position]
         holder.name.text = spell.name

@@ -1,5 +1,7 @@
 package com.example.spellbook.Fragments
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -11,28 +13,24 @@ import android.view.ViewGroup
 
 import com.example.spellbook.R
 import com.example.spellbook.domain.*
+import com.example.spellbook.ui.SpellViewmodel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_spell_list.*
 import java.lang.Class
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
  * [SpellListFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [SpellListFragment.newInstance] factory method to
- * create an instance of this fragment.
  *
  */
 class SpellListFragment : Fragment() {
     // TODO: Rename and change types of parameters
 
     private lateinit var spells: List<Spell>
+    private lateinit var viewModel: SpellViewmodel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +40,7 @@ class SpellListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel = ViewModelProviders.of(activity!!).get(SpellViewmodel::class.java)
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_spell_list, container, false)
     }
@@ -49,9 +48,10 @@ class SpellListFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        spells=createspells()
+        viewModel.getSpells().observe(this, Observer {
+            spell_list.adapter = SimpleItemRecyclerViewAdapter(this, it!!)
+        })
 
-        spell_list.adapter = SimpleItemRecyclerViewAdapter(this, spells!!)
         spell_list.layoutManager=LinearLayoutManager(activity)
     }
 
