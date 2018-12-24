@@ -1,21 +1,22 @@
 package com.example.spellbook.domain
 
 import android.os.Parcelable
+import com.example.spellbook.injection.component.ViewModelComponent
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
-
 @Parcelize
-class Spell(@field:Json(name = "name")val name: String,
-            @field:Json(name = "level")val level: Int,
-            @field:Json(name = "shool")val shool: String,
-            @field:Json(name = "source")val source: String,
-            @field:Json(name = "page")val page: Int,
-            @field:Json(name = "entries")val entries: List<String>,
-            @field:Json(name = "entriesHigherLevel")val entriesHigherLevel: List<String>,
-            @field:Json(name = "time")val time:List<Time>, val range: Range,
-            @field:Json(name = "components")val components: Components,
-            @field:Json(name = "classes")val classes: Classes,
-            @field:Json(name = "duration")val duration: Duration,
-            @field:Json(name = "meta")val meta: Meta,
-            @field:Json(name = "scalingeffects")val scalingeffects: Boolean) : Parcelable
+class Spell (@field:Json(name = "name")val name: String,
+             @field:Json(name = "description")val description: String,
+             @field:Json(name = "range")val range: String,
+             @field:Json(name = "components")val components: Components,
+             @field:Json(name = "ritual")val ritual: Boolean,
+             @field:Json(name = "duration")val duration: String,
+             @field:Json(name = "concentration")val concentration: Boolean,
+             @field:Json(name = "casting_time")val casting_time: String,
+             @field:Json(name = "level")val level: String,
+             @field:Json(name = "school")val school: String,
+             @field:Json(name = "classes")val classes: List<String>,
+             @field:Json(name = "tags")val tags: List<String>,
+             @field:Json(name = "type")val type: String) : Parcelable
+

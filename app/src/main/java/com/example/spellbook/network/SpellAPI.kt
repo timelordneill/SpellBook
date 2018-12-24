@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface SpellAPI {
 
-    @GET("/spell/")
+    @GET("spell.json")
     fun getAllSpells(): Observable<List<Spell>>
 }

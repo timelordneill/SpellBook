@@ -55,21 +55,21 @@ class SpellViewmodel : InjectedViewModel(){
     }
 
     private fun onRetrieveSpellSuccess(result: List<Spell>) {
-        //niet goedgekeurde restos wegfilteren
         spells.value=result
     }
 
     private fun onRetrieveSpellFinish() {
-        Logger.i("Finished retrieving resto info")
+        Logger.i("Finished retrieving info")
         loadingVisibility.value = false
     }
 
     private fun onRetrieveSpellStart() {
-        Logger.i("Started retrieving resto info")
+        Logger.i("Started retrieving info")
         loadingVisibility.value = true
     }
 
     fun getSpells(): MutableLiveData<List<Spell>> {
+        Logger.i(spells.toString())
         return spells
     }
 

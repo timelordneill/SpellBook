@@ -27,9 +27,7 @@ import java.lang.Class
  *
  */
 class SpellListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
 
-    private lateinit var spells: List<Spell>
     private lateinit var viewModel: SpellViewmodel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,14 +51,5 @@ class SpellListFragment : Fragment() {
         })
 
         spell_list.layoutManager=LinearLayoutManager(activity)
-    }
-
-    private fun createspells(): List<Spell>{
-        var acid= Spell("Acid Splash", 0, "C", "PHB", 211, listOf("ding"), listOf("anderding"),
-            listOf(Time(1, "action")), Range("point", Distance("feet", 60)), Components(true, true,"")
-            ,Classes(listOf(Class("Sorcerer", "PHB"), Class("Wizard", "PHB")), listOf()),Duration(false,null, null),
-            Meta(false),true)
-
-        return listOf(acid)
     }
 }

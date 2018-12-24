@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class Components(@field:Json(name = "v")val v:Boolean,
-                 @field:Json(name = "s")val s: Boolean,
-                 @field:Json(name = "m")val m:String) : Parcelable {
-}
+class Components(@field:Json(name = "material")val material: Boolean,
+                 @field:Json(name = "raw")val raw: String,
+                 @field:Json(name = "somatic")val somatic: Boolean,
+                 @field:Json(name = "verbal")val verbal: Boolean) : Parcelable
