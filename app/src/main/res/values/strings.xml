@@ -17,4 +17,8 @@
 
     <string name="classe2">Wizard</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="show_spellbooks">Show spellbooks</string>
+
 </resources>

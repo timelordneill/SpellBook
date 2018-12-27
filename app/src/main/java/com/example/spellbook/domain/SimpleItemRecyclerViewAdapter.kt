@@ -22,9 +22,8 @@ class SimpleItemRecyclerViewAdapter(private val parentActivity: SpellListFragmen
      */
     init {
         onClickListener = View.OnClickListener { v ->
-
             val item = v.tag as Spell
-
+            parentActivity.showDetail(item)
         }
     }
 

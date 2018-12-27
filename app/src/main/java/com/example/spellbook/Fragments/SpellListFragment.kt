@@ -6,10 +6,12 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.ActionBar
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.Toolbar
+import android.view.*
 
 import com.example.spellbook.R
 import com.example.spellbook.domain.*
@@ -39,6 +41,7 @@ class SpellListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel = ViewModelProviders.of(activity!!).get(SpellViewmodel::class.java)
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_spell_list, container, false)
     }
@@ -50,6 +53,20 @@ class SpellListFragment : Fragment() {
             spell_list.adapter = SimpleItemRecyclerViewAdapter(this, it!!)
         })
 
-        spell_list.layoutManager=LinearLayoutManager(activity)
+        spell_list.layoutManager= LinearLayoutManager(activity)
+    }
+
+    fun showDetail(spell: Spell){
+        val detailFragment = SpellDetailFragment()
+        this.fragmentManager!!.beginTransaction()
+            .replace(R.id.list_frame, detailFragment)
+            .addToBackStack(null)
+            .commit()
+        detailFragment.addObject(spell)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater!!.inflate(R.menu.listfragmentmenu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }
