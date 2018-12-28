@@ -24,14 +24,11 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
             .add(R.id.list_frame, SpellListFragment())
-            .addToBackStack("main")
             .commit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         supportActionBar!!.setDisplayShowTitleEnabled(false)
-        menuInflater.inflate(R.menu.listfragmentmenu,menu)
-
         return true
     }
 }
