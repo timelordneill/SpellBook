@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SearchView
 import android.support.v7.widget.Toolbar
 import android.view.*
 
@@ -19,6 +20,9 @@ import com.example.spellbook.ui.SpellViewmodel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_spell_list.*
 import java.lang.Class
+import android.support.v4.view.MenuItemCompat.getActionView
+
+
 
 
 /**
@@ -32,6 +36,7 @@ class SpellListFragment : Fragment() {
 
     private lateinit var viewModel: SpellViewmodel
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -41,7 +46,7 @@ class SpellListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel = ViewModelProviders.of(activity!!).get(SpellViewmodel::class.java)
-
+        setHasOptionsMenu(true)
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_spell_list, container, false)
     }
@@ -67,6 +72,34 @@ class SpellListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.listfragmentmenu, menu)
+
+        var search=menu!!.findItem(R.id.action_search)
+
+        if(search != null){
+            val searchView=search.actionView as SearchView
+            val fragment=this
+            searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(p0: String?): Boolean {
+                    return true
+                }
+
+                override fun onQueryTextChange(p0: String?): Boolean {
+                    if(p0!!.isNotEmpty()){
+                        val searchQuery = p0.toLowerCase()
+
+                        viewModel.getSpells().observe(fragment, Observer {
+                            var filteredsSpells=it!!.filter{spell ->
+                                spell.name.toLowerCase().contains(searchQuery)
+                            }
+                            spell_list.adapter=SimpleItemRecyclerViewAdapter(fragment, filteredsSpells)
+                        })
+                    }
+                    return true
+                }
+
+            })
+        }
+
         super.onCreateOptionsMenu(menu, inflater)
     }
 }
