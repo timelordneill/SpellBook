@@ -1,21 +1,18 @@
 <resources>
     <string name="app_name">SpellBook</string>
 
-    <string name="spell">Acid Splash</string>
+    <string-array name="classes">
+        <item>All Classes</item>
+        <item>Bard</item>
+        <item>Cleric</item>
+        <item>Druid</item>
+        <item>Paladin</item>
+        <item>Ranger</item>
+        <item>Sorcerer</item>
+        <item>Warlock</item>
+        <item>Wizard</item>
+    </string-array>
 
-    <string name="level">0</string>
-
-    <string name="page">221</string>
-
-    <string name="scaling">true</string>
-
-    <string name="school">C</string>
-
-    <string name="source">PHB</string>
-
-    <string name="classe1">Sorcerer</string>
-
-    <string name="classe2">Wizard</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

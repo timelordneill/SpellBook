@@ -21,9 +21,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_spell_list.*
 import java.lang.Class
 import android.support.v4.view.MenuItemCompat.getActionView
-
-
-
+import android.support.v4.view.MenuItemCompat.getActionView
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.Spinner
+import android.widget.ArrayAdapter
 
 /**
  * A simple [Fragment] subclass.
@@ -73,11 +75,13 @@ class SpellListFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.listfragmentmenu, menu)
 
+        //get query from searchview and flter list
         var search=menu!!.findItem(R.id.action_search)
+        val fragment=this
 
         if(search != null){
             val searchView=search.actionView as SearchView
-            val fragment=this
+
             searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(p0: String?): Boolean {
                     return true
@@ -98,6 +102,37 @@ class SpellListFragment : Fragment() {
                 }
 
             })
+        }
+
+        //set items in spinner
+        val item = menu.findItem(R.id.class_spinner)
+        val spinner = item.actionView as Spinner
+
+        val adapter = ArrayAdapter.createFromResource(activity, R.array.classes, android.R.layout.simple_spinner_item)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter=adapter
+
+        spinner.onItemSelectedListener= object : OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedClass=resources.getStringArray(R.array.classes)[position].toLowerCase()
+
+                if(selectedClass != "all classes"){
+                    viewModel.getSpells().observe(fragment, Observer {
+                        var filteredsSpells=it!!.filter{spell ->
+                            spell.tags.contains(selectedClass)
+                        }
+                        spell_list.adapter=SimpleItemRecyclerViewAdapter(fragment, filteredsSpells)
+                    })
+                }else{
+                    viewModel.getSpells().observe(fragment, Observer {
+                        spell_list.adapter = SimpleItemRecyclerViewAdapter(fragment, it!!)
+                    })
+                }
+
+            }
         }
 
         super.onCreateOptionsMenu(menu, inflater)
