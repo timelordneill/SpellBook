@@ -58,7 +58,7 @@ class SpellListFragment : Fragment() {
         super.onStart()
 
         viewModel.getSpells().observe(this, Observer {
-            spell_list.adapter = SimpleItemRecyclerViewAdapter(this, it!!.sortedBy { spell -> spell.level })
+            spell_list.adapter = SpellRecyclerViewAdapter(this, it!!.sortedBy { spell -> spell.level })
         })
 
         spell_list.layoutManager= LinearLayoutManager(activity)
@@ -97,7 +97,7 @@ class SpellListFragment : Fragment() {
                             var filteredsSpells=it!!.filter{spell ->
                                 spell.name.toLowerCase().contains(searchQuery)
                             }
-                            spell_list.adapter=SimpleItemRecyclerViewAdapter(fragment, filteredsSpells.sortedBy { spell -> spell.level })
+                            spell_list.adapter=SpellRecyclerViewAdapter(fragment, filteredsSpells.sortedBy { spell -> spell.level })
                         })
                     }
                     return true
@@ -126,11 +126,11 @@ class SpellListFragment : Fragment() {
                         var filteredsSpells=it!!.filter{spell ->
                             spell.tags.contains(selectedClass)
                         }
-                        spell_list.adapter=SimpleItemRecyclerViewAdapter(fragment, filteredsSpells.sortedBy { spell -> spell.level })
+                        spell_list.adapter=SpellRecyclerViewAdapter(fragment, filteredsSpells.sortedBy { spell -> spell.level })
                     })
                 }else{
                     viewModel.getSpells().observe(fragment, Observer {
-                        spell_list.adapter = SimpleItemRecyclerViewAdapter(fragment, it!!.sortedBy { spell -> spell.level })
+                        spell_list.adapter = SpellRecyclerViewAdapter(fragment, it!!.sortedBy { spell -> spell.level })
                     })
                 }
             }

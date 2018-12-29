@@ -7,6 +7,7 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBar
 import android.view.Menu
 import android.view.MenuItem
+import com.example.spellbook.Fragments.SavedSpellbooksFragment
 import com.example.spellbook.Fragments.SpellListFragment
 import com.example.spellbook.R
 import kotlinx.android.synthetic.main.activity_main.*
@@ -32,8 +33,14 @@ class MainActivity : AppCompatActivity() {
             setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp)
         }
 
+        //set list of spells as main fragment
         supportFragmentManager.beginTransaction()
             .add(R.id.list_frame, SpellListFragment())
+            .commit()
+
+        //set list of saved spellbooks as fragment in drawer
+        supportFragmentManager.beginTransaction()
+            .add(R.id.list_frame_spellbooks, SavedSpellbooksFragment())
             .commit()
     }
 

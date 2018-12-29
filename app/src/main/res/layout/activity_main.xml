@@ -25,14 +25,10 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-    <FrameLayout android:layout_width="wrap_content"
+    <FrameLayout android:id="@+id/list_frame_spellbooks"
+                 android:layout_width="wrap_content"
                  android:layout_height="match_parent"
                  android:layout_gravity="start">
 
-
-        <TextView
-                android:text="TestTestTestTestTestTestTestTest"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/textView"/>
     </FrameLayout>
 </android.support.v4.widget.DrawerLayout>

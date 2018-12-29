@@ -11,8 +11,8 @@ import com.example.spellbook.Fragments.SpellListFragment
 import com.example.spellbook.R
 import kotlinx.android.synthetic.main.spell_list_content.view.*
 
-class SimpleItemRecyclerViewAdapter(private val parentActivity: SpellListFragment,
-                                    private val spells: List<Spell>) :
+class SpellRecyclerViewAdapter(private val parentActivity: SpellListFragment,
+                               private val spells: List<Spell>) :
     RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
     private val onClickListener: View.OnClickListener
