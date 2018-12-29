@@ -40,11 +40,16 @@ class SimpleItemRecyclerViewAdapter(private val parentActivity: SpellListFragmen
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val spell = spells[position]
         holder.name.text = spell.name
-        holder.level.text=spell.level
+
+        if(spell.level=="0"){
+            holder.level.text="Cantrip"
+        }else{
+            holder.level.text=spell.level
+        }
         holder.school.text=spell.school
 
         with(holder.itemView) {
-            tag = spell // Save the comic represented by this view
+            tag = spell // Save the spell represented by this view
             setOnClickListener(onClickListener)
         }
     }
