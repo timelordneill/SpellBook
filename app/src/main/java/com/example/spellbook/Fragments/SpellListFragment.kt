@@ -26,6 +26,7 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.Spinner
 import android.widget.ArrayAdapter
+import kotlinx.android.synthetic.main.toolbar.*
 
 /**
  * A simple [Fragment] subclass.
@@ -72,30 +73,8 @@ class SpellListFragment : Fragment() {
         detailFragment.addObject(spell)
     }
 
-    fun sortSpells(list: List<Spell>): List<Spell>{
-        var cantrips: MutableList<Spell> = arrayListOf()
-
-        list.forEach {
-            if(it.level.toLowerCase()=="cantrip"){
-                cantrips.add(it)
-            }
-        }
-
-        var sortedlist=list.filter {
-            it.level.toLowerCase().contains("cantrip")
-        }.sortedBy {
-            it.level.toInt()
-        }.sortedBy {
-            it.name
-        }
-
-        var sortedcantrips = cantrips.sortedBy { it.name } as MutableList<Spell>
-        sortedcantrips.addAll(sortedcantrips)
-
-        return sortedcantrips
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+
         inflater!!.inflate(R.menu.listfragmentmenu, menu)
 
         //get query from searchview and flter list
