@@ -39,6 +39,8 @@ class SpellListFragment : Fragment() {
 
     private lateinit var viewModel: SpellViewmodel
 
+    private lateinit var spinnerValue: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,7 +85,6 @@ class SpellListFragment : Fragment() {
 
         if(search != null){
             val searchView=search.actionView as SearchView
-
             searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(p0: String?): Boolean {
                     return true
@@ -96,8 +97,21 @@ class SpellListFragment : Fragment() {
                         viewModel.getSpells().observe(fragment, Observer {
                             var filteredsSpells=it!!.filter{spell ->
                                 spell.name.toLowerCase().contains(searchQuery)
+                            } as MutableList
+
+                            if(spinnerValue != null ){
+                                if(spinnerValue.toLowerCase()!="all classes"){
+                                    var filteredSpellsClass= filteredsSpells.filter {spell ->
+                                        spell.tags.contains(spinnerValue.toLowerCase())
+                                    }
+
+                                    spell_list.adapter=SpellRecyclerViewAdapter(fragment, filteredSpellsClass.sortedBy { spell -> spell.level })
+                                }else{
+                                    spell_list.adapter=SpellRecyclerViewAdapter(fragment, filteredsSpells.sortedBy { spell -> spell.level })
+                                }
+                            }else{
+                                spell_list.adapter=SpellRecyclerViewAdapter(fragment, filteredsSpells.sortedBy { spell -> spell.level })
                             }
-                            spell_list.adapter=SpellRecyclerViewAdapter(fragment, filteredsSpells.sortedBy { spell -> spell.level })
                         })
                     }
                     return true
@@ -120,17 +134,31 @@ class SpellListFragment : Fragment() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedClass=resources.getStringArray(R.array.classes)[position].toLowerCase()
+                val searchView=search.actionView as SearchView
+
+                fragment.spinnerValue=selectedClass
 
                 if(selectedClass != "all classes"){
                     viewModel.getSpells().observe(fragment, Observer {
+                        //filter spells by selected class
                         var filteredsSpells=it!!.filter{spell ->
                             spell.tags.contains(selectedClass)
                         }
-                        spell_list.adapter=SpellRecyclerViewAdapter(fragment, filteredsSpells.sortedBy { spell -> spell.level })
+                        //then filter by search query in search bar
+                        var filterbysearch=filteredsSpells.filter {spell ->
+                            spell.name.contains(searchView.query)
+                        }
+
+                        spell_list.adapter=SpellRecyclerViewAdapter(fragment, filterbysearch.sortedBy { spell -> spell.level })
                     })
                 }else{
                     viewModel.getSpells().observe(fragment, Observer {
-                        spell_list.adapter = SpellRecyclerViewAdapter(fragment, it!!.sortedBy { spell -> spell.level })
+                        //all classes is selected, so no class filtering required, only by search query
+                        val searchresult=it!!.filter {spell ->
+                            spell.name.contains(searchView.query)
+                        }
+
+                        spell_list.adapter = SpellRecyclerViewAdapter(fragment, searchresult.sortedBy { spell -> spell.level })
                     })
                 }
             }
