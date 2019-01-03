@@ -26,6 +26,7 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.Spinner
 import android.widget.ArrayAdapter
+import kotlinx.android.synthetic.main.toolbar.*
 
 /**
  * A simple [Fragment] subclass.
@@ -57,7 +58,7 @@ class SpellListFragment : Fragment() {
         super.onStart()
 
         viewModel.getSpells().observe(this, Observer {
-            spell_list.adapter = SimpleItemRecyclerViewAdapter(this, it!!.sortedBy { spell -> spell.level })
+            spell_list.adapter = SpellRecyclerViewAdapter(this, it!!.sortedBy { spell -> spell.level })
         })
 
         spell_list.layoutManager= LinearLayoutManager(activity)
@@ -72,30 +73,8 @@ class SpellListFragment : Fragment() {
         detailFragment.addObject(spell)
     }
 
-    fun sortSpells(list: List<Spell>): List<Spell>{
-        var cantrips: MutableList<Spell> = arrayListOf()
-
-        list.forEach {
-            if(it.level.toLowerCase()=="cantrip"){
-                cantrips.add(it)
-            }
-        }
-
-        var sortedlist=list.filter {
-            it.level.toLowerCase().contains("cantrip")
-        }.sortedBy {
-            it.level.toInt()
-        }.sortedBy {
-            it.name
-        }
-
-        var sortedcantrips = cantrips.sortedBy { it.name } as MutableList<Spell>
-        sortedcantrips.addAll(sortedcantrips)
-
-        return sortedcantrips
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+
         inflater!!.inflate(R.menu.listfragmentmenu, menu)
 
         //get query from searchview and flter list
@@ -118,7 +97,7 @@ class SpellListFragment : Fragment() {
                             var filteredsSpells=it!!.filter{spell ->
                                 spell.name.toLowerCase().contains(searchQuery)
                             }
-                            spell_list.adapter=SimpleItemRecyclerViewAdapter(fragment, filteredsSpells.sortedBy { spell -> spell.level })
+                            spell_list.adapter=SpellRecyclerViewAdapter(fragment, filteredsSpells.sortedBy { spell -> spell.level })
                         })
                     }
                     return true
@@ -147,11 +126,11 @@ class SpellListFragment : Fragment() {
                         var filteredsSpells=it!!.filter{spell ->
                             spell.tags.contains(selectedClass)
                         }
-                        spell_list.adapter=SimpleItemRecyclerViewAdapter(fragment, filteredsSpells.sortedBy { spell -> spell.level })
+                        spell_list.adapter=SpellRecyclerViewAdapter(fragment, filteredsSpells.sortedBy { spell -> spell.level })
                     })
                 }else{
                     viewModel.getSpells().observe(fragment, Observer {
-                        spell_list.adapter = SimpleItemRecyclerViewAdapter(fragment, it!!.sortedBy { spell -> spell.level })
+                        spell_list.adapter = SpellRecyclerViewAdapter(fragment, it!!.sortedBy { spell -> spell.level })
                     })
                 }
             }
