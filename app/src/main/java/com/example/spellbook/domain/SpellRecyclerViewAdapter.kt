@@ -48,6 +48,18 @@ class SpellRecyclerViewAdapter(private val parentActivity: SpellListFragment,
         }
         holder.school.text=spell.school
 
+        // Save the spell represented by this view
+        when {
+            spell.school=="abjuration" -> holder.schoolImage.setImageResource(R.drawable.abjuration)
+            spell.school=="conjuration" -> holder.schoolImage.setImageResource(R.drawable.conjuration)
+            spell.school=="divination" -> holder.schoolImage.setImageResource(R.drawable.divination)
+            spell.school=="enchantment" -> holder.schoolImage.setImageResource(R.drawable.enchantment)
+            spell.school=="evocation" -> holder.schoolImage.setImageResource(R.drawable.evocation)
+            spell.school=="illusion" -> holder.schoolImage.setImageResource(R.drawable.illusion)
+            spell.school=="necromancy" -> holder.schoolImage.setImageResource(R.drawable.necromancy)
+            spell.school=="transmutation" -> holder.schoolImage.setImageResource(R.drawable.transmutation)
+        }
+
         with(holder.itemView) {
             tag = spell // Save the spell represented by this view
             setOnClickListener(onClickListener)
@@ -60,5 +72,6 @@ class SpellRecyclerViewAdapter(private val parentActivity: SpellListFragment,
         val name: TextView = view.text_name
         val level: TextView = view.text_level
         val school: TextView = view.text_school
+        val schoolImage: de.hdodenhof.circleimageview.CircleImageView=view.school_image
     }
 }
