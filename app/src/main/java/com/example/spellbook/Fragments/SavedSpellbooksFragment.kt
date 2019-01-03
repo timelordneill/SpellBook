@@ -13,13 +13,12 @@ import android.view.ViewGroup
 import com.example.spellbook.R
 import com.example.spellbook.domain.*
 import com.example.spellbook.ui.SpellViewmodel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_saved_spellbooks.*
 
 class SavedSpellbooksFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private var fullList=this.full_list
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +30,29 @@ class SavedSpellbooksFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        val fullList=this.full_list
+        val addBook=this.add_spellbook
+        fullList.setOnClickListener{
+            val listFragment = SpellListFragment()
+            this.fragmentManager!!.beginTransaction()
+                .replace(R.id.list_frame, listFragment)
+                .addToBackStack(null)
+                .commit()
+
+            val drawer=activity!!.drawer_layout
+            drawer.closeDrawers()
+        }
+        addBook.setOnClickListener{
+            val addSpellbookFragment = AddSpellbookFragment()
+            this.fragmentManager!!.beginTransaction()
+                .replace(R.id.list_frame, addSpellbookFragment)
+                .addToBackStack(null)
+                .commit()
+
+            val drawer=activity!!.drawer_layout
+            drawer.closeDrawers()
+        }
 
         val spellbooks= arrayListOf<Spellbook>(Spellbook("Frank", arrayListOf(CharacterClass(Classes.Bard, 5)), null), Spellbook("Donk", arrayListOf(CharacterClass(Classes.Sorcerer, 5)), null))
 

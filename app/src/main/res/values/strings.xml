@@ -17,5 +17,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="show_spellbooks">Show spellbooks</string>
+    <string name="full_spell_list">Full Spell List</string>
+    <string name="add_spellbook">Add Spellbook</string>
+    <string name="saved_spellbooks">Saved Spellbooks</string>
 
 </resources>
