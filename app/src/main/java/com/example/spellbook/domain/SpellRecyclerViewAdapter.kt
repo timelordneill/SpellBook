@@ -48,7 +48,6 @@ class SpellRecyclerViewAdapter(private val parentActivity: SpellListFragment,
         }
         holder.school.text=spell.school
 
-        // Save the spell represented by this view
         when {
             spell.school=="abjuration" -> holder.schoolImage.setImageResource(R.drawable.abjuration)
             spell.school=="conjuration" -> holder.schoolImage.setImageResource(R.drawable.conjuration)

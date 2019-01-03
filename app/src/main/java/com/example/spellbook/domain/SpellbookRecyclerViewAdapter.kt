@@ -41,17 +41,23 @@ class SpellbookRecyclerViewAdapter(private val parentActivity: SavedSpellbooksFr
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val spellbook = spellbooks[position]
         holder.name.text = spellbook.name
-        var charaterclasses=""
-        spellbook.characterClass.forEach {
-            charaterclasses=charaterclasses+it.name.className+" "+it.level.toString()+" ,"
+
+        when {
+            spellbook.characterClass[0].name==Classes.Bard -> holder.classImage.setImageResource(R.drawable.bard)
+            spellbook.characterClass[0].name==Classes.Sorcerer -> holder.classImage.setImageResource(R.drawable.sorcerer)
+            spellbook.characterClass[0].name==Classes.Cleric -> holder.classImage.setImageResource(R.drawable.cleric)
+            spellbook.characterClass[0].name==Classes.Druid -> holder.classImage.setImageResource(R.drawable.druid)
+            spellbook.characterClass[0].name==Classes.Ranger -> holder.classImage.setImageResource(R.drawable.ranger)
+            spellbook.characterClass[0].name==Classes.Paladin -> holder.classImage.setImageResource(R.drawable.paladin)
+            spellbook.characterClass[0].name==Classes.Warlock -> holder.classImage.setImageResource(R.drawable.warlock)
+            spellbook.characterClass[0].name==Classes.Wizard -> holder.classImage.setImageResource(R.drawable.wizard)
         }
-        holder.characterClass.text=charaterclasses
     }
 
     override fun getItemCount() = spellbooks.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.text_charactername
-        val characterClass: TextView = view.text_class
+        val classImage: de.hdodenhof.circleimageview.CircleImageView=view.class_image
     }
 }
