@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.spell_list_content.view.*
 
 class SpellRecyclerViewAdapter(private val parentActivity: SpellListFragment,
                                private val spells: List<Spell>) :
-    RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
+    RecyclerView.Adapter<SpellRecyclerViewAdapter.ViewHolder>() {
 
     private val onClickListener: View.OnClickListener
 

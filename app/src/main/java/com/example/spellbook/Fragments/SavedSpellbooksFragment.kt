@@ -11,13 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.example.spellbook.R
-import com.example.spellbook.domain.SimpleItemRecyclerViewAdapter
+import com.example.spellbook.domain.*
 import com.example.spellbook.ui.SpellViewmodel
-import kotlinx.android.synthetic.main.fragment_spell_list.*
+import kotlinx.android.synthetic.main.fragment_saved_spellbooks.*
 
 class SavedSpellbooksFragment : Fragment() {
-
-    private lateinit var viewModel: SpellViewmodel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +32,10 @@ class SavedSpellbooksFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        viewModel.getSpells().observe(this, Observer {
-            spell_list.adapter = SimpleItemRecyclerViewAdapter(this, it!!.sortedBy { spell -> spell.level })
-        })
+        val spellbooks= arrayListOf<Spellbook>(Spellbook("Frank", arrayListOf(CharacterClass(Classes.Bard, 5)), null), Spellbook("Donk", arrayListOf(CharacterClass(Classes.Sorcerer, 5)), null))
 
-        spell_list.layoutManager= LinearLayoutManager(activity)
+        spellbook_list.adapter = SpellbookRecyclerViewAdapter(this, spellbooks)
+
+        spellbook_list.layoutManager= LinearLayoutManager(activity)
     }
 }
