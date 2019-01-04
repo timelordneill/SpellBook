@@ -2,31 +2,21 @@ package com.example.spellbook.Fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.ActionBar
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
-import android.support.v7.widget.Toolbar
 import android.view.*
 
 import com.example.spellbook.R
 import com.example.spellbook.domain.*
 import com.example.spellbook.ui.SpellViewmodel
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_spell_list.*
-import java.lang.Class
-import android.support.v4.view.MenuItemCompat.getActionView
-import android.support.v4.view.MenuItemCompat.getActionView
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.Spinner
 import android.widget.ArrayAdapter
-import kotlinx.android.synthetic.main.toolbar.*
+import com.example.spellbook.domain.RecyclerViewAdapters.SpellRecyclerViewAdapter
 
 /**
  * A simple [Fragment] subclass.
@@ -60,7 +50,9 @@ class SpellListFragment : Fragment() {
         super.onStart()
 
         viewModel.getSpells().observe(this, Observer {
-            spell_list.adapter = SpellRecyclerViewAdapter(this, it!!.sortedBy { spell -> spell.level })
+            spell_list.adapter = SpellRecyclerViewAdapter(
+                this,
+                it!!.sortedBy { spell -> spell.level })
         })
 
         spell_list.layoutManager= LinearLayoutManager(activity)
@@ -105,12 +97,21 @@ class SpellListFragment : Fragment() {
                                         spell.tags.contains(spinnerValue.toLowerCase())
                                     }
 
-                                    spell_list.adapter=SpellRecyclerViewAdapter(fragment, filteredSpellsClass.sortedBy { spell -> spell.level })
+                                    spell_list.adapter=
+                                            SpellRecyclerViewAdapter(
+                                                fragment,
+                                                filteredSpellsClass.sortedBy { spell -> spell.level })
                                 }else{
-                                    spell_list.adapter=SpellRecyclerViewAdapter(fragment, filteredsSpells.sortedBy { spell -> spell.level })
+                                    spell_list.adapter=
+                                            SpellRecyclerViewAdapter(
+                                                fragment,
+                                                filteredsSpells.sortedBy { spell -> spell.level })
                                 }
                             }else{
-                                spell_list.adapter=SpellRecyclerViewAdapter(fragment, filteredsSpells.sortedBy { spell -> spell.level })
+                                spell_list.adapter=
+                                        SpellRecyclerViewAdapter(
+                                            fragment,
+                                            filteredsSpells.sortedBy { spell -> spell.level })
                             }
                         })
                     }
@@ -149,7 +150,9 @@ class SpellListFragment : Fragment() {
                             spell.name.contains(searchView.query)
                         }
 
-                        spell_list.adapter=SpellRecyclerViewAdapter(fragment, filterbysearch.sortedBy { spell -> spell.level })
+                        spell_list.adapter= SpellRecyclerViewAdapter(
+                            fragment,
+                            filterbysearch.sortedBy { spell -> spell.level })
                     })
                 }else{
                     viewModel.getSpells().observe(fragment, Observer {
@@ -158,7 +161,9 @@ class SpellListFragment : Fragment() {
                             spell.name.contains(searchView.query)
                         }
 
-                        spell_list.adapter = SpellRecyclerViewAdapter(fragment, searchresult.sortedBy { spell -> spell.level })
+                        spell_list.adapter = SpellRecyclerViewAdapter(
+                            fragment,
+                            searchresult.sortedBy { spell -> spell.level })
                     })
                 }
             }

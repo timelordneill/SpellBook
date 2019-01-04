@@ -10,7 +10,8 @@ buildscript {
             "okHttp"        : '3.11.0',
 
             'rxandroid'     : "2.1.0",
-            'dagger'        : "2.16"
+            'dagger'        : "2.16",
+            'room'          : "1.1.1"
     ]
 
     repositories {

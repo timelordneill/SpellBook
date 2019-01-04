@@ -28,9 +28,18 @@
                 android:text="TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/text_charactername"
+                android:id="@+id/text_classname"
                 android:layout_weight="1"
                 android:textSize="20sp"/>
+
+        <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_level"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:gravity="right"/>
 
     </LinearLayout>
 
