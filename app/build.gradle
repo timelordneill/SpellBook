@@ -23,6 +23,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -94,6 +95,13 @@ dependencies {
 
     //circular imageviews
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    // Room components
+    implementation "android.arch.persistence.room:runtime:$versions.room"
+    kapt "android.arch.persistence.room:compiler:$versions.room"
+    androidTestImplementation "android.arch.persistence.room:testing:$versions.room"
+
+    implementation 'com.android.support:multidex:1.0.3'
 }
 
 apply plugin: 'com.google.gms.google-services'

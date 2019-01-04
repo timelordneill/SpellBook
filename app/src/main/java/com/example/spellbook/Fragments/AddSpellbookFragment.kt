@@ -65,5 +65,10 @@ class AddSpellbookFragment : Fragment() {
         add_class_button.setOnClickListener {
             popup.showAsDropDown(spellbook_constraint, 10, 10)
         }
+
+        create_spellbook_button.setOnClickListener {
+            val name=character_name_text.text.toString()
+            Spellbook(name, classes, arrayListOf())
+        }
     }
 }
