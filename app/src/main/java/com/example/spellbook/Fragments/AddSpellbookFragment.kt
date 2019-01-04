@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.PopupWindow
 import android.widget.Spinner
+import android.widget.Toast
 
 import com.example.spellbook.R
 import com.example.spellbook.domain.*
@@ -60,11 +61,33 @@ class AddSpellbookFragment : Fragment() {
         view.level_np.minValue=1
 
         view.add_class_button.setOnClickListener {
-            val characterClass= view.class_spinner.selectedItem as Classes
-            classes.add(CharacterClass(characterClass, view.level_np.value))
-            class_recyclerview.adapter = ClassRecyclerViewAdapter(this, classes)
-            class_recyclerview.layoutManager= LinearLayoutManager(activity)
-            popup.dismiss()
+            var totalLevel=0
+            classes.forEach { characterClass ->
+                totalLevel += characterClass.level
+            }
+
+            if(totalLevel + view.level_np.value > 20){
+                val toast = Toast.makeText(context, "Character level can not exeed 20", Toast.LENGTH_SHORT)
+                toast.show()
+                popup.dismiss()
+            }else{
+                val characterClass= view.class_spinner.selectedItem as Classes
+                val sameClass=classes.filter { characterClass2 ->
+                    characterClass == characterClass2.name
+                }
+
+                if (sameClass.isEmpty()){
+                    classes.add(CharacterClass(characterClass, view.level_np.value))
+                    class_recyclerview.adapter = ClassRecyclerViewAdapter(this, classes)
+                    class_recyclerview.layoutManager= LinearLayoutManager(activity)
+                    popup.dismiss()
+                }else{
+                    val toast = Toast.makeText(context, "Character have the same class twice", Toast.LENGTH_SHORT)
+                    toast.show()
+                    popup.dismiss()
+                }
+
+            }
         }
 
         add_class_button.setOnClickListener {
@@ -72,16 +95,22 @@ class AddSpellbookFragment : Fragment() {
         }
 
         create_spellbook_button.setOnClickListener {
-            val name=character_name_text.text.toString()
-            val book=Spellbook(0, name, classes, arrayListOf())
-            val converter=DatabaseSpellbookConverter()
-            val databasebook=converter.toDatabaseSpellbook(book)
-            spellbookViewmodel.insert(databasebook)
-            val listFragment = SpellListFragment()
-            this.fragmentManager!!.beginTransaction()
-                .replace(R.id.list_frame, listFragment)
-                .addToBackStack(null)
-                .commit()
+            if(character_name_text.text.isNullOrEmpty()){
+                charactername_textInputLayout.error="Name can not be empty"
+            }else if(classes.isNullOrEmpty()){
+                class_error_text.visibility=View.VISIBLE
+            }else{
+                val name=character_name_text.text.toString()
+                val book=Spellbook(0, name, classes, arrayListOf())
+                val converter=DatabaseSpellbookConverter()
+                val databasebook=converter.toDatabaseSpellbook(book)
+                spellbookViewmodel.insert(databasebook)
+                val listFragment = SpellListFragment()
+                this.fragmentManager!!.beginTransaction()
+                    .replace(R.id.list_frame, listFragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
         }
     }
 }
