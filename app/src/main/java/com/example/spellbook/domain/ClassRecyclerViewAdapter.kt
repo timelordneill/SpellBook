@@ -10,8 +10,7 @@ import com.example.spellbook.Activities.MainActivity
 import com.example.spellbook.Fragments.AddSpellbookFragment
 import com.example.spellbook.Fragments.SpellListFragment
 import com.example.spellbook.R
-import kotlinx.android.synthetic.main.spell_list_content.view.*
-import kotlinx.android.synthetic.main.spellbook_list_content.view.*
+import kotlinx.android.synthetic.main.class_list_content.view.*
 
 class ClassRecyclerViewAdapter(private val parentActivity: AddSpellbookFragment,
                                private val classes: List<CharacterClass>) :
@@ -20,17 +19,14 @@ class ClassRecyclerViewAdapter(private val parentActivity: AddSpellbookFragment,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.spellbook_list_content, parent, false)
+            .inflate(R.layout.class_list_content, parent, false)
         return ViewHolder(view)
     }
 
-    /**
-     * fills the items in the list
-     * Puts Cantrip in stead of lvl 0 spell
-     */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val characterClass = classes[position]
         holder.name.text = characterClass.name.className
+        holder.level.text=characterClass.level.toString()
 
         when {
             characterClass.name == Classes.Bard -> holder.classImage.setImageResource(R.drawable.bard)
@@ -47,7 +43,8 @@ class ClassRecyclerViewAdapter(private val parentActivity: AddSpellbookFragment,
     override fun getItemCount() = classes.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val name: TextView = view.text_charactername
+        val name: TextView = view.text_classname
+        val level: TextView=view.text_level
         val classImage: de.hdodenhof.circleimageview.CircleImageView = view.class_image
     }
 
