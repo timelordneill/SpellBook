@@ -24,8 +24,8 @@ class SpellbookRecyclerViewAdapter(private val parentActivity: SavedSpellbooksFr
      */
     init {
         onClickListener = View.OnClickListener { v ->
-//            val item = v.tag as Spell
-//            parentActivity.showDetail(item)
+            val item = v.tag as Spellbook
+            parentActivity.showSavedSpellbook(item)
         }
     }
 
@@ -51,6 +51,11 @@ class SpellbookRecyclerViewAdapter(private val parentActivity: SavedSpellbooksFr
             spellbook.characterClass[0].name==Classes.Paladin -> holder.classImage.setImageResource(R.drawable.paladin)
             spellbook.characterClass[0].name==Classes.Warlock -> holder.classImage.setImageResource(R.drawable.warlock)
             spellbook.characterClass[0].name==Classes.Wizard -> holder.classImage.setImageResource(R.drawable.wizard)
+        }
+
+        with(holder.itemView) {
+            tag = spellbook // Save the spell represented by this view
+            setOnClickListener(onClickListener)
         }
     }
 

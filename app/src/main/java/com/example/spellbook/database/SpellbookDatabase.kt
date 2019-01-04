@@ -15,7 +15,7 @@ abstract class SpellbookDatabase : RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: SpellbookDatabase? = null
-        const val DATABASE_NAME = "Word_database"
+        const val DATABASE_NAME = "spellbook_database"
 
         fun getDatabase(context: Context): SpellbookDatabase {
             val tempInstance = INSTANCE
@@ -30,18 +30,12 @@ abstract class SpellbookDatabase : RoomDatabase() {
                 ).addCallback(object : RoomDatabase.Callback() {
                     override fun onOpen(db: SupportSQLiteDatabase) {
                         super.onOpen(db)
-//                        doAsync {
-//                            populateDatabase(INSTANCE!!.wordDao())
-//                        }
                     }
                 })
                     .build()
                 INSTANCE = instance
                 return instance
             }
-        }
-
-        fun populateDatabase(wordDao: SpellbookDao) {
         }
     }
 }

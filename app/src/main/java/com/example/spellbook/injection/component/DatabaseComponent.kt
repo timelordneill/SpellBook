@@ -10,5 +10,5 @@ import javax.inject.Singleton
 @Component(modules = [DatabaseModule::class])
 interface DatabaseComponent {
     fun inject(app: App)
-    fun inject(wordViewModel: SpellbookViewModel)
+    fun inject(spellbookViewModel: SpellbookViewModel)
 }

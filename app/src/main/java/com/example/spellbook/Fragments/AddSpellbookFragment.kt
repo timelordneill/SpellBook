@@ -1,6 +1,7 @@
 package com.example.spellbook.Fragments
 
 import android.app.ActionBar
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.net.Uri
 import android.opengl.Visibility
@@ -17,6 +18,7 @@ import android.widget.Spinner
 
 import com.example.spellbook.R
 import com.example.spellbook.domain.*
+import com.example.spellbook.ui.SpellbookViewModel
 import kotlinx.android.synthetic.main.fragment_add_spellbook.*
 import kotlinx.android.synthetic.main.fragment_spell_list.*
 import kotlinx.android.synthetic.main.popup_add_class.view.*
@@ -26,6 +28,7 @@ class AddSpellbookFragment : Fragment() {
 
     private lateinit var spellbook:Spellbook
     private var classes= mutableListOf<CharacterClass>()
+    private lateinit var spellbookViewmodel:SpellbookViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +38,7 @@ class AddSpellbookFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        spellbookViewmodel = ViewModelProviders.of(activity!!).get(SpellbookViewModel::class.java)
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_spellbook, container, false)
     }
@@ -68,7 +72,14 @@ class AddSpellbookFragment : Fragment() {
 
         create_spellbook_button.setOnClickListener {
             val name=character_name_text.text.toString()
-            Spellbook(name, classes, arrayListOf())
+            val book=Spellbook(name, classes, arrayListOf())
+            val converter=DatabaseSpellbookConverter()
+            spellbookViewmodel.insert(converter.toDatabaseSpellbook(book))
+            val listFragment = SpellListFragment()
+            this.fragmentManager!!.beginTransaction()
+                .replace(R.id.list_frame, listFragment)
+                .addToBackStack(null)
+                .commit()
         }
     }
 }

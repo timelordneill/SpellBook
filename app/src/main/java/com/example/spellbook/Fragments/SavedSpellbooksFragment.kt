@@ -1,6 +1,7 @@
 package com.example.spellbook.Fragments
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -13,10 +14,14 @@ import android.view.ViewGroup
 import com.example.spellbook.R
 import com.example.spellbook.domain.*
 import com.example.spellbook.ui.SpellViewmodel
+import com.example.spellbook.ui.SpellbookViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_saved_spellbooks.*
 
 class SavedSpellbooksFragment : Fragment() {
+
+    private lateinit var  spellbookViewmodel: SpellbookViewModel
+    private lateinit var spellViewmodel: SpellViewmodel
 
     private var fullList=this.full_list
 
@@ -25,6 +30,8 @@ class SavedSpellbooksFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        spellbookViewmodel = ViewModelProviders.of(activity!!).get(SpellbookViewModel::class.java)
+        spellViewmodel = ViewModelProviders.of(activity!!).get(SpellViewmodel::class.java)
         return inflater.inflate(R.layout.fragment_saved_spellbooks, container, false)
     }
 
@@ -54,10 +61,20 @@ class SavedSpellbooksFragment : Fragment() {
             drawer.closeDrawers()
         }
 
-        val spellbooks= arrayListOf<Spellbook>(Spellbook("Frank", arrayListOf(CharacterClass(Classes.Bard, 5)), null), Spellbook("Donk", arrayListOf(CharacterClass(Classes.Sorcerer, 5)), null))
+        spellbookViewmodel.allSpellbooks.observe(this, Observer {
+                val converter=DatabaseSpellbookConverter(activity)
+                val spellbooks=converter.fromDatabaseSpellbook(it!! as MutableList<DatabaseSpellbook>)
+                spellbook_list.adapter = SpellbookRecyclerViewAdapter(this, spellbooks)
+                spellbook_list.layoutManager= LinearLayoutManager(activity)
+        })
+    }
 
-        spellbook_list.adapter = SpellbookRecyclerViewAdapter(this, spellbooks)
-
-        spellbook_list.layoutManager= LinearLayoutManager(activity)
+    fun showSavedSpellbook(spellbook: Spellbook){
+        val spellbookFragment = SpellbookFragment()
+        this.fragmentManager!!.beginTransaction()
+            .replace(R.id.list_frame, spellbookFragment)
+            .addToBackStack(null)
+            .commit()
+        spellbookFragment.addObject(spellbook)
     }
 }
