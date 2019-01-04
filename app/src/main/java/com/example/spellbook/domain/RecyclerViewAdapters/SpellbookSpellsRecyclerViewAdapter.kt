@@ -1,19 +1,18 @@
-package com.example.spellbook.domain
+package com.example.spellbook.domain.RecyclerViewAdapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import com.example.spellbook.Activities.MainActivity
-import com.example.spellbook.Fragments.SpellListFragment
+import com.example.spellbook.Fragments.SpellbookFragment
 import com.example.spellbook.R
+import com.example.spellbook.domain.Spell
 import kotlinx.android.synthetic.main.spell_list_content.view.*
 
-class SpellRecyclerViewAdapter(private val parentActivity: SpellListFragment,
-                               private val spells: List<Spell>) :
-    RecyclerView.Adapter<SpellRecyclerViewAdapter.ViewHolder>() {
+class SpellbookSpellsRecyclerViewAdapter(private val parentActivity: SpellbookFragment,
+                               private val spells: List<Spell>?) :
+    RecyclerView.Adapter<SpellbookSpellsRecyclerViewAdapter.ViewHolder>() {
 
     private val onClickListener: View.OnClickListener
 
@@ -38,7 +37,7 @@ class SpellRecyclerViewAdapter(private val parentActivity: SpellListFragment,
      * Puts Cantrip in stead of lvl 0 spell
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val spell = spells[position]
+        val spell = spells!![position]
         holder.name.text = spell.name
 
         if(spell.level=="0"){
@@ -65,7 +64,7 @@ class SpellRecyclerViewAdapter(private val parentActivity: SpellListFragment,
         }
     }
 
-    override fun getItemCount() = spells.size
+    override fun getItemCount() = spells!!.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.text_name

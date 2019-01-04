@@ -22,50 +22,6 @@ class DatabaseSpellbookConverter(val activity:FragmentActivity? = null){
         }
         spells=spells.removeSuffix(";")
 
-        return DatabaseSpellbook(0, spellbook.name, classes, spells)
-    }
-
-    fun fromDatabaseSpellbook(spellbooks:MutableList<DatabaseSpellbook>):MutableList<Spellbook>{
-        val spellViewmodel = ViewModelProviders.of(activity!!).get(SpellViewmodel::class.java)
-        var convertedSpellbooks= mutableListOf<Spellbook>()
-        spellbooks.forEach { spellbook ->
-
-            var characterClasses= mutableListOf<CharacterClass>()
-            spellbook.characterClasses.split(";").forEach {
-                var classString=it.split(",")
-                characterClasses.add(CharacterClass(stringToClasses(classString[0]),classString[1].toInt()))
-            }
-            if(spellbook.spells.isNotEmpty() && spellbook.spells != ""){
-                spellViewmodel.getSpells().observe(activity, Observer {
-                    var spellsFromString= mutableListOf<Spell>()
-                    spellbook.spells.split(";").forEach {string ->
-                        spellsFromString.add(it!!.filter { spell ->
-                            spell.name==string
-                        }[0])
-                    }
-
-                    convertedSpellbooks.add(Spellbook(spellbook.name, characterClasses, spellsFromString))
-                })
-            }else{
-                convertedSpellbooks.add(Spellbook(spellbook.name, characterClasses, mutableListOf()))
-            }
-        }
-
-        return convertedSpellbooks
-    }
-
-    fun stringToClasses(string:String):Classes{
-        when (string) {
-            "Bard" -> return Classes.Bard
-            "Wizard" -> return Classes.Wizard
-            "Warlock" -> return Classes.Warlock
-            "Paladin" -> return Classes.Paladin
-            "Ranger" -> return Classes.Ranger
-            "Druid" -> return Classes.Druid
-            "Cleric" -> return Classes.Cleric
-            "Sorcerer" -> return Classes.Sorcerer
-        }
-
-        return Classes.Bard
+        return DatabaseSpellbook(spellbook.id, spellbook.name, classes, spells)
     }
 }

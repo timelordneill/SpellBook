@@ -22,4 +22,12 @@ class SpellbookViewModel: ViewModel() {
     fun insert(spellbook: DatabaseSpellbook) {
         spellbookRepository.insert(spellbook)
     }
+
+    fun update(spellbook: DatabaseSpellbook){
+        spellbookRepository.update(spellbook)
+    }
+
+    fun deleteAll(){
+        spellbookRepository.deleteAll()
+    }
 }

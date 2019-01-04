@@ -18,6 +18,7 @@ import android.widget.Spinner
 
 import com.example.spellbook.R
 import com.example.spellbook.domain.*
+import com.example.spellbook.domain.RecyclerViewAdapters.ClassRecyclerViewAdapter
 import com.example.spellbook.ui.SpellbookViewModel
 import kotlinx.android.synthetic.main.fragment_add_spellbook.*
 import kotlinx.android.synthetic.main.fragment_spell_list.*
@@ -72,9 +73,10 @@ class AddSpellbookFragment : Fragment() {
 
         create_spellbook_button.setOnClickListener {
             val name=character_name_text.text.toString()
-            val book=Spellbook(name, classes, arrayListOf())
+            val book=Spellbook(0, name, classes, arrayListOf())
             val converter=DatabaseSpellbookConverter()
-            spellbookViewmodel.insert(converter.toDatabaseSpellbook(book))
+            val databasebook=converter.toDatabaseSpellbook(book)
+            spellbookViewmodel.insert(databasebook)
             val listFragment = SpellListFragment()
             this.fragmentManager!!.beginTransaction()
                 .replace(R.id.list_frame, listFragment)

@@ -1,15 +1,14 @@
-package com.example.spellbook.domain
+package com.example.spellbook.domain.RecyclerViewAdapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import com.example.spellbook.Activities.MainActivity
 import com.example.spellbook.Fragments.AddSpellbookFragment
-import com.example.spellbook.Fragments.SpellListFragment
 import com.example.spellbook.R
+import com.example.spellbook.domain.CharacterClass
+import com.example.spellbook.domain.Classes
 import kotlinx.android.synthetic.main.class_list_content.view.*
 
 class ClassRecyclerViewAdapter(private val parentActivity: AddSpellbookFragment,

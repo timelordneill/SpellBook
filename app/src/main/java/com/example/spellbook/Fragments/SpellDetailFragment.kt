@@ -1,29 +1,15 @@
 package com.example.spellbook.Fragments
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
-import android.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import com.example.spellbook.R
 import com.example.spellbook.domain.Spell
+import kotlinx.android.synthetic.main.fragment_spell_detail.*
 import kotlinx.android.synthetic.main.fragment_spell_detail.view.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [SpellDetailFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [SpellDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class SpellDetailFragment : android.support.v4.app.Fragment() {
 
     private lateinit var spell: Spell
@@ -50,6 +36,18 @@ class SpellDetailFragment : android.support.v4.app.Fragment() {
         }
 
         return rootView
+    }
+
+    override fun onStart() {
+        super.onStart()
+        add_button.setOnClickListener {
+            val addSpellFragment = AddSpellFragment()
+            this.fragmentManager!!.beginTransaction()
+                .replace(R.id.list_frame, addSpellFragment)
+                .addToBackStack(null)
+                .commit()
+            addSpellFragment.addObject(spell)
+        }
     }
 
     fun addObject(item: Spell){

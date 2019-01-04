@@ -14,4 +14,18 @@ class SpellbookRepository(private val spellbookDao: SpellbookDao) {
             spellbookDao.insert(spellbook)
         }
     }
+
+    @WorkerThread
+    fun update(spellbook: DatabaseSpellbook) {
+        doAsync {
+            spellbookDao.update(spellbook)
+        }
+    }
+
+    @WorkerThread
+    fun deleteAll() {
+        doAsync {
+            spellbookDao.deleteAll()
+        }
+    }
 }
