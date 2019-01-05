@@ -7,4 +7,4 @@ package com.example.spellbook.domain
  * @param level: Represents the level the character has in this class
  */
 class CharacterClass (val name: Classes,
-                      val level: Int)
+                      var level: Int)
