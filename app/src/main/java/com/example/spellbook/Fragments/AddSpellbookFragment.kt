@@ -15,6 +15,7 @@ import com.example.spellbook.R
 import com.example.spellbook.domain.*
 import com.example.spellbook.domain.RecyclerViewAdapters.ClassRecyclerViewAdapter
 import com.example.spellbook.ui.SpellbookViewModel
+import com.example.spellbook.utils.twoPane
 import kotlinx.android.synthetic.main.fragment_add_spellbook.*
 import kotlinx.android.synthetic.main.popup_add_class.view.*
 
@@ -26,6 +27,8 @@ class AddSpellbookFragment : Fragment() {
     private lateinit var spellbook:Spellbook
     private var classes= mutableListOf<CharacterClass>()
     private lateinit var spellbookViewmodel:SpellbookViewModel
+    private var popupOpen=false
+    private lateinit var popup:PopupWindow
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +47,7 @@ class AddSpellbookFragment : Fragment() {
 
         //set popup to open when button is clicked
         val view=layoutInflater.inflate(R.layout.popup_add_class, null)
-        val popup=PopupWindow(view, ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT)
+        popup=PopupWindow(view, ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT)
 
         view.class_spinner.adapter=ArrayAdapter<Classes>(context, android.R.layout.simple_spinner_item, Classes.values())
 
@@ -81,9 +84,18 @@ class AddSpellbookFragment : Fragment() {
             }
         }
 
+        view.cancel_button.setOnClickListener {
+            popup.dismiss()
+        }
+
         add_class_button.setOnClickListener {
-            popup.showAsDropDown(spellbook_constraint, 10, 10)
-            popup.update(50, 50, 400, 500)
+            popupOpen=true
+            if(twoPane){
+                popup.showAsDropDown(spellbook_constraint, 10, 10)
+                popup.update(50, 50, 400, 500)
+            }else{
+                popup.showAsDropDown(spellbook_constraint, 20, 20)
+            }
         }
 
         create_spellbook_button.setOnClickListener {
@@ -104,5 +116,10 @@ class AddSpellbookFragment : Fragment() {
                     .commit()
             }
         }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        popup.dismiss()
     }
 }
