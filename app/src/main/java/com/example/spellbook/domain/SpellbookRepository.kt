@@ -23,6 +23,13 @@ class SpellbookRepository(private val spellbookDao: SpellbookDao) {
     }
 
     @WorkerThread
+    fun delete(spellbook: DatabaseSpellbook) {
+        doAsync {
+            spellbookDao.delete(spellbook)
+        }
+    }
+
+    @WorkerThread
     fun deleteAll() {
         doAsync {
             spellbookDao.deleteAll()

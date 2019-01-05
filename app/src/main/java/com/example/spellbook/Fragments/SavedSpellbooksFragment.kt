@@ -1,7 +1,9 @@
 package com.example.spellbook.Fragments
 
+import android.app.AlertDialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -75,6 +77,35 @@ class SavedSpellbooksFragment : Fragment() {
             .addToBackStack(null)
             .commit()
         spellbookFragment.addObject(spellbook)
+        val drawer=activity!!.drawer_layout
+        drawer.closeDrawers()
+    }
+
+    fun deleteSpellbook(spellbook: Spellbook){
+        val alert=AlertDialog.Builder(context)
+        alert.setMessage("Are you sure you want to delete this spellbook?")
+        alert.setCancelable(true)
+
+        alert.setPositiveButton("Yes"){dialog, which ->
+            val converter=DatabaseSpellbookConverter(activity)
+            spellbookViewmodel.delete(converter.toDatabaseSpellbook(spellbook))
+
+            spellbookViewmodel.allSpellbooks.observe(this, Observer {
+                val spellbooks=fromDatabaseSpellbook(it!! as MutableList<DatabaseSpellbook>)
+                spellbook_list.adapter =
+                        SpellbookRecyclerViewAdapter(this, spellbooks)
+                spellbook_list.layoutManager= LinearLayoutManager(activity)
+            })
+
+            dialog.dismiss()
+        }
+
+        alert.setNegativeButton("No"){dialog, which ->
+            dialog.dismiss()
+        }
+
+        val dialog=alert.create()
+        dialog.show()
     }
 
     fun fromDatabaseSpellbook(spellbooks:MutableList<DatabaseSpellbook>):MutableList<Spellbook>{
