@@ -69,9 +69,8 @@ class SavedSpellbooksFragment : Fragment() {
         }
 
         spellbookViewmodel.allSpellbooks.observe(this, Observer {
-                val spellbooks=fromDatabaseSpellbook(it!! as MutableList<DatabaseSpellbook>)
                 spellbook_list.adapter =
-                        SpellbookRecyclerViewAdapter(this, spellbooks)
+                        SpellbookRecyclerViewAdapter(this, it!!)
                 spellbook_list.layoutManager= LinearLayoutManager(activity)
         })
     }
@@ -79,13 +78,16 @@ class SavedSpellbooksFragment : Fragment() {
     /**
      * shows the spellbook
      */
-    fun showSavedSpellbook(spellbook: Spellbook){
+    fun showSavedSpellbook(spellbook: DatabaseSpellbook){
+        val converter=DatabaseSpellbookConverter(activity)
+        val convertedBook=converter.fromDatabaseSpellbook(spellbook)
+
         val spellbookFragment = SpellbookFragment()
         this.fragmentManager!!.beginTransaction()
             .replace(R.id.list_frame, spellbookFragment)
             .addToBackStack(null)
             .commit()
-        spellbookFragment.addObject(spellbook)
+        spellbookFragment.addObject(convertedBook)
         val drawer=activity!!.drawer_layout
         drawer.closeDrawers()
 
@@ -97,19 +99,17 @@ class SavedSpellbooksFragment : Fragment() {
     /**
      * deletes [Spellbook]
      */
-    fun deleteSpellbook(spellbook: Spellbook){
+    fun deleteSpellbook(spellbook: DatabaseSpellbook){
         val alert=AlertDialog.Builder(context)
         alert.setMessage("Are you sure you want to delete this spellbook?")
         alert.setCancelable(true)
 
         alert.setPositiveButton("Yes"){dialog, which ->
-            val converter=DatabaseSpellbookConverter(activity)
-            spellbookViewmodel.delete(converter.toDatabaseSpellbook(spellbook))
+            spellbookViewmodel.delete(spellbook)
 
             spellbookViewmodel.allSpellbooks.observe(this, Observer {
-                val spellbooks=fromDatabaseSpellbook(it!! as MutableList<DatabaseSpellbook>)
                 spellbook_list.adapter =
-                        SpellbookRecyclerViewAdapter(this, spellbooks)
+                        SpellbookRecyclerViewAdapter(this, it!!)
                 spellbook_list.layoutManager= LinearLayoutManager(activity)
             })
 
