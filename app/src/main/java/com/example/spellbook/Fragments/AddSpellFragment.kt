@@ -59,6 +59,13 @@ class AddSpellFragment : android.support.v4.app.Fragment() {
         val converter=DatabaseSpellbookConverter(activity)
         val databasebook=converter.toDatabaseSpellbook(spellbook)
         spellbookViewmodel.update(databasebook)
+
+        val spellbookFragment = SpellbookFragment()
+        this.fragmentManager!!.beginTransaction()
+            .replace(R.id.list_frame, spellbookFragment)
+            .addToBackStack(null)
+            .commit()
+        spellbookFragment.addObject(spellbook)
     }
 
     /**
