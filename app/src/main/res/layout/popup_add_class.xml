@@ -40,7 +40,7 @@
             android:textColor="@color/colorAccent"
             android:visibility="gone" tools:layout_editor_absoluteY="281dp" tools:layout_editor_absoluteX="191dp"/>
     <Button
-            android:text="@string/add_class"
+            android:text="Add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/add_class_button"
             app:icon="@drawable/ic_add_circle_black_24dp"
