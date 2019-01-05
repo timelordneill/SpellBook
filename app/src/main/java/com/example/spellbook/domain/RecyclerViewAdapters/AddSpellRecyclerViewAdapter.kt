@@ -11,6 +11,12 @@ import com.example.spellbook.domain.Classes
 import com.example.spellbook.domain.Spellbook
 import kotlinx.android.synthetic.main.spellbook_list_content.view.*
 
+/**
+ * [AddSpellRecyclerViewAdapter] is used in [AddSpellFragment] to fill the recyclerview
+ *
+ * @param parentActivity: parent of the recyclerview that uses this adapter
+ * @param spellbooks: [Spellbook] that are shown in the list
+ */
 class AddSpellRecyclerViewAdapter(private val parentActivity: AddSpellFragment,
                                   private val spellbooks: List<Spellbook>) :
     RecyclerView.Adapter<AddSpellRecyclerViewAdapter.ViewHolder>() {

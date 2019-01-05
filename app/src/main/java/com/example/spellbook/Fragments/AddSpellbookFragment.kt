@@ -25,7 +25,9 @@ import kotlinx.android.synthetic.main.fragment_add_spellbook.*
 import kotlinx.android.synthetic.main.fragment_spell_list.*
 import kotlinx.android.synthetic.main.popup_add_class.view.*
 
-
+/**
+ * [AddSpellbookFragment] creates a new [Spellbook] and saves it locally
+ */
 class AddSpellbookFragment : Fragment() {
 
     private lateinit var spellbook:Spellbook

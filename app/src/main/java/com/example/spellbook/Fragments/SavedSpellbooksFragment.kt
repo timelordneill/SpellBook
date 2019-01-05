@@ -19,6 +19,9 @@ import com.example.spellbook.ui.SpellbookViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_saved_spellbooks.*
 
+/**
+ * [SavedSpellbooksFragment] shows saved spellbooks in nav drawer
+ */
 class SavedSpellbooksFragment : Fragment() {
 
     private lateinit var  spellbookViewmodel: SpellbookViewModel
@@ -70,6 +73,9 @@ class SavedSpellbooksFragment : Fragment() {
         })
     }
 
+    /**
+     * shows the spellbook
+     */
     fun showSavedSpellbook(spellbook: Spellbook){
         val spellbookFragment = SpellbookFragment()
         this.fragmentManager!!.beginTransaction()
@@ -81,6 +87,9 @@ class SavedSpellbooksFragment : Fragment() {
         drawer.closeDrawers()
     }
 
+    /**
+     * deletes [Spellbook]
+     */
     fun deleteSpellbook(spellbook: Spellbook){
         val alert=AlertDialog.Builder(context)
         alert.setMessage("Are you sure you want to delete this spellbook?")
@@ -108,6 +117,9 @@ class SavedSpellbooksFragment : Fragment() {
         dialog.show()
     }
 
+    /**
+     * converts list of [DatabaseSpellbook] to list of [Spellbook]
+     */
     fun fromDatabaseSpellbook(spellbooks:MutableList<DatabaseSpellbook>):MutableList<Spellbook>{
         var convertedSpellbooks= mutableListOf<Spellbook>()
         spellbooks.forEach { spellbook ->
@@ -137,6 +149,9 @@ class SavedSpellbooksFragment : Fragment() {
         return convertedSpellbooks
     }
 
+    /**
+     * converts string to [Classes]
+     */
     fun stringToClasses(string:String):Classes{
         when (string) {
             "Bard" -> return Classes.Bard

@@ -7,6 +7,9 @@ import com.example.spellbook.R
 import com.example.spellbook.ui.SpellViewmodel
 import com.example.spellbook.ui.SpellbookViewModel
 
+/**
+ * [DatabaseSpellbookConverter] converts [Spellbook] to [DatabaseSpellbook]
+ */
 class DatabaseSpellbookConverter(val activity:FragmentActivity? = null){
 
     fun toDatabaseSpellbook(spellbook:Spellbook):DatabaseSpellbook{

@@ -18,6 +18,9 @@ import com.example.spellbook.ui.SpellbookViewModel
 import kotlinx.android.synthetic.main.fragment_add_spell.*
 import kotlinx.android.synthetic.main.fragment_spell_list.*
 
+/**
+ * [SpellbookFragment] shows spells belonging to a spellbook
+ */
 class SpellbookFragment : android.support.v4.app.Fragment() {
 
     private lateinit var spellbook: Spellbook
@@ -40,10 +43,16 @@ class SpellbookFragment : android.support.v4.app.Fragment() {
         spell_list.layoutManager= LinearLayoutManager(activity)
     }
 
+    /**
+     * Adds [Spellbook] to fragment
+     */
     fun addObject(item: Spellbook){
         this.spellbook = item
     }
 
+    /**
+     * shows detailscreen of [Spell]
+     */
     fun showDetail(spell: Spell){
         val detailFragment = SpellDetailFragment()
         this.fragmentManager!!.beginTransaction()
@@ -53,6 +62,9 @@ class SpellbookFragment : android.support.v4.app.Fragment() {
         detailFragment.addObject(spell)
     }
 
+    /**
+     * deletes [Spell] from [spellbook]
+     */
     fun deleteSpell(spell: Spell){
         val alert= AlertDialog.Builder(context)
         alert.setMessage("Are you sure you want to delete this spell")
@@ -77,6 +89,9 @@ class SpellbookFragment : android.support.v4.app.Fragment() {
         dialog.show()
     }
 
+    /**
+     * creates teh actionbar and handels searching
+     */
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.spellbookfragmentmenu, menu)
 

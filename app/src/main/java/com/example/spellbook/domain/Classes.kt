@@ -1,5 +1,8 @@
 package com.example.spellbook.domain
 
+/**
+ * [Classes] is used in [CharacterClass] as the class name
+ */
 enum class Classes(val className: String) {
     Bard("Bard"),
     Cleric("Cleric"),

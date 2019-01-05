@@ -16,6 +16,9 @@ import com.example.spellbook.ui.SpellbookViewModel
 import kotlinx.android.synthetic.main.fragment_add_spell.*
 import kotlinx.android.synthetic.main.fragment_spell_list.*
 
+/**
+ * [AddSpellFragment] shows a list of saved [Spellbook]s to add a spell to
+ */
 class AddSpellFragment : android.support.v4.app.Fragment() {
 
     private lateinit var  spellbookViewmodel: SpellbookViewModel
@@ -41,10 +44,16 @@ class AddSpellFragment : android.support.v4.app.Fragment() {
         spellbook_list.layoutManager= LinearLayoutManager(activity)
     }
 
+    /**
+     * adds [spell] to add to [Spellbook] to fragment
+     */
     fun addObject(spell:Spell){
         this.spell=spell
     }
 
+    /**
+     * adds [spell] to chosen [Spellbook]
+     */
     fun addSpell(spellbook: Spellbook){
         spellbook.spells!!.add(spell)
         val converter=DatabaseSpellbookConverter(activity)
@@ -52,6 +61,9 @@ class AddSpellFragment : android.support.v4.app.Fragment() {
         spellbookViewmodel.update(databasebook)
     }
 
+    /**
+     * Converts [DatabaseSpellbook] to [Spellbook]
+     */
     fun fromDatabaseSpellbook(spellbooks:MutableList<DatabaseSpellbook>):MutableList<Spellbook>{
         val spellViewmodel = ViewModelProviders.of(activity!!).get(SpellViewmodel::class.java)
         var convertedSpellbooks= mutableListOf<Spellbook>()
