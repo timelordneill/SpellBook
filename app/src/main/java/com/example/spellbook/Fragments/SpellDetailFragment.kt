@@ -16,9 +16,6 @@ import kotlinx.android.synthetic.main.fragment_spell_detail.view.*
 class SpellDetailFragment : android.support.v4.app.Fragment() {
 
     private lateinit var spell: Spell
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

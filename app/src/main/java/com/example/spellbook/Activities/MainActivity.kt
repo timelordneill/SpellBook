@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        var mDrawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+        val mDrawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
         return when (item.itemId) {
             android.R.id.home -> {
                 mDrawerLayout.openDrawer(GravityCompat.START)

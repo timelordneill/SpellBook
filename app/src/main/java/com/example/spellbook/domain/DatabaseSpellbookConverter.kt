@@ -1,11 +1,6 @@
 package com.example.spellbook.domain
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.support.v4.app.FragmentActivity
-import com.example.spellbook.R
-import com.example.spellbook.ui.SpellViewmodel
-import com.example.spellbook.ui.SpellbookViewModel
 
 /**
  * [DatabaseSpellbookConverter] converts [Spellbook] to [DatabaseSpellbook]

@@ -1,10 +1,7 @@
 package com.example.spellbook.Fragments
 
 import android.app.AlertDialog
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
-import android.app.Fragment
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
@@ -12,11 +9,9 @@ import android.view.*
 
 import com.example.spellbook.R
 import com.example.spellbook.domain.*
-import com.example.spellbook.domain.RecyclerViewAdapters.SpellRecyclerViewAdapter
 import com.example.spellbook.domain.RecyclerViewAdapters.SpellbookSpellsRecyclerViewAdapter
 import com.example.spellbook.ui.SpellbookViewModel
 import com.example.spellbook.utils.twoPane
-import kotlinx.android.synthetic.main.fragment_add_spell.*
 import kotlinx.android.synthetic.main.fragment_spell_list.*
 
 /**
@@ -104,7 +99,7 @@ class SpellbookFragment : android.support.v4.app.Fragment() {
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.spellbookfragmentmenu, menu)
 
-        var search=menu!!.findItem(R.id.spellbook_search)
+        val search=menu!!.findItem(R.id.spellbook_search)
         val fragment=this
 
         if(search != null){

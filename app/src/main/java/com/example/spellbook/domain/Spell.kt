@@ -1,10 +1,6 @@
 package com.example.spellbook.domain
 
-import android.arch.persistence.room.Embedded
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
 import android.os.Parcelable
-import com.example.spellbook.injection.component.ViewModelComponent
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 

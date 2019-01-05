@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools" android:layout_width="wrap_content"
+                                             android:layout_width="wrap_content"
                                              android:layout_height="wrap_content"
                                              android:background="?attr/colorBackgroundFloating">
 
     <TextView
-            android:text="Add Class"
+            android:text="@string/add_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/textView2" android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
@@ -34,7 +34,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginRight="8dp"/>
     <TextView
-            android:text="Level can not be empty"
+            android:text="@string/level_can_not_be_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/error_text"
             app:layout_constraintBottom_toTopOf="@+id/add_class_button"
@@ -44,7 +44,7 @@
             android:layout_marginStart="8dp" android:textColor="@color/colorAccent"
             android:visibility="gone"/>
     <Button
-            android:text="Add Class"
+            android:text="@string/add_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/add_class_button"
             app:layout_constraintBottom_toBottomOf="parent"

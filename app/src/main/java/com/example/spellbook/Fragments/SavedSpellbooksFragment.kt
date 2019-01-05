@@ -3,14 +3,12 @@ package com.example.spellbook.Fragments
 import android.app.AlertDialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.example.spellbook.R
 import com.example.spellbook.domain.*
 import com.example.spellbook.domain.RecyclerViewAdapters.SpellbookRecyclerViewAdapter
@@ -129,19 +127,19 @@ class SavedSpellbooksFragment : Fragment() {
     /**
      * converts list of [DatabaseSpellbook] to list of [Spellbook]
      */
-    fun fromDatabaseSpellbook(spellbooks:MutableList<DatabaseSpellbook>):MutableList<Spellbook>{
-        var convertedSpellbooks= mutableListOf<Spellbook>()
+    private fun fromDatabaseSpellbook(spellbooks:MutableList<DatabaseSpellbook>):MutableList<Spellbook>{
+        val convertedSpellbooks= mutableListOf<Spellbook>()
         spellbooks.forEach { spellbook ->
 
-            var characterClasses= mutableListOf<CharacterClass>()
+            val characterClasses= mutableListOf<CharacterClass>()
             spellbook.characterClasses.split(";").forEach {
-                var classString=it.split(",")
+                val classString=it.split(",")
                 characterClasses.add(CharacterClass(stringToClasses(classString[0]),classString[1].toInt()))
             }
 
             if(spellbook.spells.isNotEmpty() && spellbook.spells != ""){
                 spellViewmodel.getSpells().observe(activity!!, Observer {
-                    var spellsFromString= mutableListOf<Spell>()
+                    val spellsFromString= mutableListOf<Spell>()
                     spellbook.spells.split(";").forEach {string ->
                         spellsFromString.add(it!!.filter { spell ->
                             spell.name==string
@@ -161,7 +159,7 @@ class SavedSpellbooksFragment : Fragment() {
     /**
      * converts string to [Classes]
      */
-    fun stringToClasses(string:String):Classes{
+    private fun stringToClasses(string:String):Classes{
         when (string) {
             "Bard" -> return Classes.Bard
             "Wizard" -> return Classes.Wizard

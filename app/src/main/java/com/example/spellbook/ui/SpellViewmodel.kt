@@ -1,9 +1,6 @@
 package com.example.spellbook.ui
 
-import android.annotation.SuppressLint
 import android.arch.lifecycle.MutableLiveData
-import android.os.AsyncTask
-import android.util.Log
 import com.example.spellbook.base.InjectedViewModel
 import com.example.spellbook.domain.Spell
 import com.example.spellbook.network.SpellAPI
@@ -11,10 +8,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import com.orhanobut.logger.Logger
-import org.jetbrains.anko.custom.async
-import org.jetbrains.anko.doAsync
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 class SpellViewmodel : InjectedViewModel(){

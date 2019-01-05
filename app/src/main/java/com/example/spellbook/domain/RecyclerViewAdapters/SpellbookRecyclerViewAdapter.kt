@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.spellbook.Fragments.SavedSpellbooksFragment
-import com.example.spellbook.Fragments.SpellbookEditFragment
 import com.example.spellbook.R
-import com.example.spellbook.domain.CharacterClass
 import com.example.spellbook.domain.Classes
 import com.example.spellbook.domain.Spellbook
 import kotlinx.android.synthetic.main.spellbook_list_content.view.*

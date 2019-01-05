@@ -7,14 +7,12 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.example.spellbook.R
 import com.example.spellbook.domain.*
 import com.example.spellbook.domain.RecyclerViewAdapters.AddSpellRecyclerViewAdapter
 import com.example.spellbook.ui.SpellViewmodel
 import com.example.spellbook.ui.SpellbookViewModel
 import kotlinx.android.synthetic.main.fragment_add_spell.*
-import kotlinx.android.synthetic.main.fragment_spell_list.*
 
 /**
  * [AddSpellFragment] shows a list of saved [Spellbook]s to add a spell to
@@ -73,18 +71,18 @@ class AddSpellFragment : android.support.v4.app.Fragment() {
      */
     fun fromDatabaseSpellbook(spellbooks:MutableList<DatabaseSpellbook>):MutableList<Spellbook>{
         val spellViewmodel = ViewModelProviders.of(activity!!).get(SpellViewmodel::class.java)
-        var convertedSpellbooks= mutableListOf<Spellbook>()
+        val convertedSpellbooks= mutableListOf<Spellbook>()
         spellbooks.forEach { spellbook ->
 
-            var characterClasses= mutableListOf<CharacterClass>()
+            val characterClasses= mutableListOf<CharacterClass>()
             spellbook.characterClasses.split(";").forEach {
-                var classString=it.split(",")
+                val classString=it.split(",")
                 characterClasses.add(CharacterClass(stringToClasses(classString[0]),classString[1].toInt()))
             }
 
             if(spellbook.spells.isNotEmpty() && spellbook.spells != ""){
                 spellViewmodel.getSpells().observe(activity!!, Observer {
-                    var spellsFromString= mutableListOf<Spell>()
+                    val spellsFromString= mutableListOf<Spell>()
                     spellbook.spells.split(";").forEach {string ->
                         spellsFromString.add(it!!.filter { spell ->
                             spell.name==string

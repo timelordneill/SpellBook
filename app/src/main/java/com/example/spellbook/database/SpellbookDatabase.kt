@@ -1,12 +1,10 @@
 package com.example.spellbook.database
 
-import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 import com.example.spellbook.domain.DatabaseSpellbook
-import com.example.spellbook.domain.Spellbook
 
 @Database(entities = [DatabaseSpellbook::class], version = 1, exportSchema = false)
 abstract class SpellbookDatabase : RoomDatabase() {
@@ -28,9 +26,6 @@ abstract class SpellbookDatabase : RoomDatabase() {
                     SpellbookDatabase::class.java,
                     DATABASE_NAME
                 ).addCallback(object : RoomDatabase.Callback() {
-                    override fun onOpen(db: SupportSQLiteDatabase) {
-                        super.onOpen(db)
-                    }
                 })
                     .build()
                 INSTANCE = instance

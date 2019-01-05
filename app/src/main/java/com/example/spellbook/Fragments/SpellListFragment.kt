@@ -29,10 +29,6 @@ class SpellListFragment : Fragment() {
     private lateinit var spinnerValue: String
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -86,7 +82,7 @@ class SpellListFragment : Fragment() {
         inflater!!.inflate(R.menu.listfragmentmenu, menu)
 
         //get query from searchview and flter list
-        var search=menu!!.findItem(R.id.action_search)
+        val search=menu!!.findItem(R.id.action_search)
         val fragment=this
 
         if(search != null){
@@ -101,13 +97,13 @@ class SpellListFragment : Fragment() {
                         val searchQuery = p0.toLowerCase()
 
                         viewModel.getSpells().observe(fragment, Observer {
-                            var filteredsSpells=it!!.filter{spell ->
+                            val filteredsSpells=it!!.filter{ spell ->
                                 spell.name.toLowerCase().contains(searchQuery)
                             } as MutableList
 
                             if(spinnerValue != null ){
                                 if(spinnerValue.toLowerCase()!="all classes"){
-                                    var filteredSpellsClass= filteredsSpells.filter {spell ->
+                                    val filteredSpellsClass= filteredsSpells.filter { spell ->
                                         spell.tags.contains(spinnerValue.toLowerCase())
                                     }
 
@@ -156,11 +152,11 @@ class SpellListFragment : Fragment() {
                 if(selectedClass != "all classes"){
                     viewModel.getSpells().observe(fragment, Observer {
                         //filter spells by selected class
-                        var filteredsSpells=it!!.filter{spell ->
+                        val filteredsSpells=it!!.filter{ spell ->
                             spell.tags.contains(selectedClass)
                         }
                         //then filter by search query in search bar
-                        var filterbysearch=filteredsSpells.filter {spell ->
+                        val filterbysearch=filteredsSpells.filter { spell ->
                             spell.name.contains(searchView.query)
                         }
 

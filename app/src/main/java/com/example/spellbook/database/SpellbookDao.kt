@@ -4,7 +4,6 @@ package com.example.spellbook.database
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 import com.example.spellbook.domain.DatabaseSpellbook
-import com.example.spellbook.domain.Spellbook
 
 @Dao
 interface SpellbookDao {

@@ -1,6 +1,5 @@
 package com.example.spellbook.domain
 
-import android.arch.persistence.room.Entity
 import android.os.Parcelable
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize

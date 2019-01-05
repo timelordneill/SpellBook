@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.spellbook.Fragments.SavedSpellbooksFragment
 import com.example.spellbook.Fragments.SpellbookFragment
 import com.example.spellbook.R
 import com.example.spellbook.domain.Spell
-import com.example.spellbook.domain.Spellbook
 import kotlinx.android.synthetic.main.spell_list_content.view.*
 
 /**

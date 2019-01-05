@@ -1,10 +1,7 @@
 package com.example.spellbook.Fragments
 
 import android.app.ActionBar
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
-import android.app.Fragment
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -18,7 +15,6 @@ import com.example.spellbook.R
 import com.example.spellbook.domain.CharacterClass
 import com.example.spellbook.domain.Classes
 import com.example.spellbook.domain.DatabaseSpellbookConverter
-import com.example.spellbook.domain.RecyclerViewAdapters.ClassRecyclerViewAdapter
 import com.example.spellbook.domain.RecyclerViewAdapters.EditSpellbookRecyclerViewAdapter
 import com.example.spellbook.domain.Spellbook
 import com.example.spellbook.ui.SpellbookViewModel
@@ -52,7 +48,7 @@ class SpellbookEditFragment : android.support.v4.app.Fragment() {
 
         //set popup to open when button is clicked
         val view=layoutInflater.inflate(R.layout.popup_add_class, null)
-        var popup= PopupWindow(view, ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT)
+        val popup= PopupWindow(view, ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT)
 
         view.class_spinner.adapter= ArrayAdapter<Classes>(context, android.R.layout.simple_spinner_item, Classes.values())
 
