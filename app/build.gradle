@@ -4,12 +4,18 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'org.jetbrains.dokka-android'
 
 android {
     compileSdkVersion 28
 
     dataBinding {
         enabled = true
+    }
+
+    dokka{
+        outputFormat = 'html'
+        outputDirectory = "$buildDir/javadoc"
     }
 
     androidExtensions {
@@ -102,6 +108,8 @@ dependencies {
     androidTestImplementation "android.arch.persistence.room:testing:$versions.room"
 
     implementation 'com.android.support:multidex:1.0.3'
+
+
 }
 
 apply plugin: 'com.google.gms.google-services'
