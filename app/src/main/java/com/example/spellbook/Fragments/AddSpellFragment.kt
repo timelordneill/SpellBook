@@ -36,7 +36,16 @@ class AddSpellFragment : android.support.v4.app.Fragment() {
 
         spellbookViewmodel.allSpellbooks.observe(this, Observer {
             val converter=DatabaseSpellbookConverter(activity)
-            spellbook_list.adapter=AddSpellRecyclerViewAdapter(this, fromDatabaseSpellbook(it!! as MutableList<DatabaseSpellbook>))
+            val convertedBooks=converter.fromDatabaseSpellbooks(it!! as MutableList<DatabaseSpellbook>)
+            val correctClasses= mutableListOf<Spellbook>()
+            convertedBooks.forEach { book ->
+                book.characterClass.forEach{characterclass ->
+                    if(spell.classes.contains(characterclass.name.className.toLowerCase())){
+                        correctClasses.add(book)
+                    }
+                }
+            }
+            spellbook_list.adapter=AddSpellRecyclerViewAdapter(this, correctClasses)
         })
 
         spellbook_list.layoutManager= LinearLayoutManager(activity)
@@ -69,48 +78,4 @@ class AddSpellFragment : android.support.v4.app.Fragment() {
     /**
      * Converts [DatabaseSpellbook] to [Spellbook]
      */
-    fun fromDatabaseSpellbook(spellbooks:MutableList<DatabaseSpellbook>):MutableList<Spellbook>{
-        val spellViewmodel = ViewModelProviders.of(activity!!).get(SpellViewmodel::class.java)
-        val convertedSpellbooks= mutableListOf<Spellbook>()
-        spellbooks.forEach { spellbook ->
-
-            val characterClasses= mutableListOf<CharacterClass>()
-            spellbook.characterClasses.split(";").forEach {
-                val classString=it.split(",")
-                characterClasses.add(CharacterClass(stringToClasses(classString[0]),classString[1].toInt()))
-            }
-
-            if(spellbook.spells.isNotEmpty() && spellbook.spells != ""){
-                spellViewmodel.getSpells().observe(activity!!, Observer {
-                    val spellsFromString= mutableListOf<Spell>()
-                    spellbook.spells.split(";").forEach {string ->
-                        spellsFromString.add(it!!.filter { spell ->
-                            spell.name==string
-                        }[0])
-                    }
-
-                    convertedSpellbooks.add(Spellbook(spellbook.id, spellbook.name, characterClasses, spellsFromString))
-                })
-            }else{
-                convertedSpellbooks.add(Spellbook(spellbook.id, spellbook.name, characterClasses, mutableListOf()))
-            }
-        }
-
-        return convertedSpellbooks
-    }
-
-    fun stringToClasses(string:String):Classes{
-        when (string) {
-            "Bard" -> return Classes.Bard
-            "Wizard" -> return Classes.Wizard
-            "Warlock" -> return Classes.Warlock
-            "Paladin" -> return Classes.Paladin
-            "Ranger" -> return Classes.Ranger
-            "Druid" -> return Classes.Druid
-            "Cleric" -> return Classes.Cleric
-            "Sorcerer" -> return Classes.Sorcerer
-        }
-
-        return Classes.Bard
-    }
 }

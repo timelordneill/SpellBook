@@ -13,11 +13,8 @@ import android.widget.PopupWindow
 import android.widget.Toast
 
 import com.example.spellbook.R
-import com.example.spellbook.domain.CharacterClass
-import com.example.spellbook.domain.Classes
-import com.example.spellbook.domain.DatabaseSpellbookConverter
+import com.example.spellbook.domain.*
 import com.example.spellbook.domain.RecyclerViewAdapters.EditSpellbookRecyclerViewAdapter
-import com.example.spellbook.domain.Spellbook
 import com.example.spellbook.ui.SpellbookViewModel
 import kotlinx.android.synthetic.main.fragment_spellbook_edit.*
 import kotlinx.android.synthetic.main.popup_add_class.view.*
@@ -121,6 +118,20 @@ class SpellbookEditFragment : android.support.v4.app.Fragment() {
 
         alert.setPositiveButton("Delete"){dialog, which ->
             spellbook.characterClass.remove(characterclass)
+
+            //removes spells from deleted class
+            val wrongSpells= mutableListOf<Spell>()
+            val classes=spellbook.characterClass
+            spellbook.spells!!.forEach { it ->
+                classes.forEach { spellbookClass ->
+                    if(!it.classes.contains(spellbookClass.name.className.toLowerCase())){
+                        wrongSpells.add(it)
+                    }
+                }
+            }
+            wrongSpells.forEach {
+                spellbook.spells!!.remove(it)
+            }
 
             class_recyclerview.adapter = EditSpellbookRecyclerViewAdapter(this, spellbook.characterClass)
             class_recyclerview.layoutManager= LinearLayoutManager(activity)

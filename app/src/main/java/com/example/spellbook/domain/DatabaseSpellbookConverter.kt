@@ -55,6 +55,36 @@ class DatabaseSpellbookConverter(val activity:FragmentActivity? = null){
         return convertedBook
     }
 
+    fun fromDatabaseSpellbooks(spellbooks:MutableList<DatabaseSpellbook>):MutableList<Spellbook>{
+        val spellViewmodel = ViewModelProviders.of(activity!!).get(SpellViewmodel::class.java)
+        val convertedSpellbooks= mutableListOf<Spellbook>()
+        spellbooks.forEach { spellbook ->
+
+            val characterClasses= mutableListOf<CharacterClass>()
+            spellbook.characterClasses.split(";").forEach {
+                val classString=it.split(",")
+                characterClasses.add(CharacterClass(stringToClasses(classString[0]),classString[1].toInt()))
+            }
+
+            if(spellbook.spells.isNotEmpty() && spellbook.spells != ""){
+                spellViewmodel.getSpells().observe(activity!!, Observer {
+                    val spellsFromString= mutableListOf<Spell>()
+                    spellbook.spells.split(";").forEach {string ->
+                        spellsFromString.add(it!!.filter { spell ->
+                            spell.name==string
+                        }[0])
+                    }
+
+                    convertedSpellbooks.add(Spellbook(spellbook.id, spellbook.name, characterClasses, spellsFromString))
+                })
+            }else{
+                convertedSpellbooks.add(Spellbook(spellbook.id, spellbook.name, characterClasses, mutableListOf()))
+            }
+        }
+
+        return convertedSpellbooks
+    }
+
     /**
      * converts string to [Classes]
      */
