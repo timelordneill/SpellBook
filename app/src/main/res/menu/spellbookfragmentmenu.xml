@@ -9,4 +9,9 @@
           android:icon="@android:drawable/ic_menu_search"
           app:showAsAction="always"
           app:actionViewClass="android.support.v7.widget.SearchView"/>
+
+    <item android:id="@+id/spellbook_edit"
+          android:title="Edit"
+          android:icon="@drawable/ic_edit_white_24dp"
+          app:showAsAction="ifRoom"/>
 </menu>

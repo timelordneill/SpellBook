@@ -109,4 +109,23 @@ class SpellbookFragment : android.support.v4.app.Fragment() {
 
         super.onCreateOptionsMenu(menu, inflater)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.itemId){
+            R.id.spellbook_edit -> {
+                showEdit()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    fun showEdit(){
+        val editFragment = SpellbookEditFragment()
+        this.fragmentManager!!.beginTransaction()
+            .replace(R.id.list_frame, editFragment)
+            .addToBackStack(null)
+            .commit()
+        editFragment.addObject(spellbook)
+    }
 }

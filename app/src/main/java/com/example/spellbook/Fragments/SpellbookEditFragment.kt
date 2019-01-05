@@ -1,40 +1,34 @@
 package com.example.spellbook.Fragments
 
 import android.app.ActionBar
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.net.Uri
-import android.opengl.Visibility
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import android.app.Fragment
+import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.widget.LinearLayoutManager
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.PopupWindow
-import android.widget.Spinner
 import android.widget.Toast
 
 import com.example.spellbook.R
-import com.example.spellbook.domain.*
+import com.example.spellbook.domain.CharacterClass
+import com.example.spellbook.domain.Classes
+import com.example.spellbook.domain.DatabaseSpellbookConverter
 import com.example.spellbook.domain.RecyclerViewAdapters.ClassRecyclerViewAdapter
+import com.example.spellbook.domain.RecyclerViewAdapters.EditSpellbookRecyclerViewAdapter
+import com.example.spellbook.domain.Spellbook
 import com.example.spellbook.ui.SpellbookViewModel
-import kotlinx.android.synthetic.main.fragment_add_spellbook.*
-import kotlinx.android.synthetic.main.fragment_spell_list.*
+import kotlinx.android.synthetic.main.fragment_spellbook_edit.*
 import kotlinx.android.synthetic.main.popup_add_class.view.*
 
-
-class AddSpellbookFragment : Fragment() {
+class SpellbookEditFragment : android.support.v4.app.Fragment() {
 
     private lateinit var spellbook:Spellbook
-    private var classes= mutableListOf<CharacterClass>()
-    private lateinit var spellbookViewmodel:SpellbookViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var  spellbookViewmodel: SpellbookViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,27 +36,29 @@ class AddSpellbookFragment : Fragment() {
     ): View? {
         spellbookViewmodel = ViewModelProviders.of(activity!!).get(SpellbookViewModel::class.java)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_spellbook, container, false)
+        return inflater.inflate(R.layout.fragment_spellbook_edit, container, false)
     }
 
     override fun onStart() {
         super.onStart()
 
-        class_recyclerview.adapter = ClassRecyclerViewAdapter(this, classes)
+        class_recyclerview.adapter = EditSpellbookRecyclerViewAdapter(this, spellbook.characterClass)
         class_recyclerview.layoutManager= LinearLayoutManager(activity)
+
+        character_name_text.setText(spellbook.name)
 
         //set popup to open when button is clicked
         val view=layoutInflater.inflate(R.layout.popup_add_class, null)
-        var popup=PopupWindow(view, ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT)
+        var popup= PopupWindow(view, ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT)
 
-        view.class_spinner.adapter=ArrayAdapter<Classes>(context, android.R.layout.simple_spinner_item, Classes.values())
+        view.class_spinner.adapter= ArrayAdapter<Classes>(context, android.R.layout.simple_spinner_item, Classes.values())
 
         view.level_np.maxValue=20
         view.level_np.minValue=1
 
         view.add_class_button.setOnClickListener {
             var totalLevel=0
-            classes.forEach { characterClass ->
+            spellbook.characterClass.forEach { characterClass ->
                 totalLevel += characterClass.level
             }
 
@@ -72,13 +68,13 @@ class AddSpellbookFragment : Fragment() {
                 popup.dismiss()
             }else{
                 val characterClass= view.class_spinner.selectedItem as Classes
-                val sameClass=classes.filter { characterClass2 ->
+                val sameClass=spellbook.characterClass.filter { characterClass2 ->
                     characterClass == characterClass2.name
                 }
 
                 if (sameClass.isEmpty()){
-                    classes.add(CharacterClass(characterClass, view.level_np.value))
-                    class_recyclerview.adapter = ClassRecyclerViewAdapter(this, classes)
+                    spellbook.characterClass.add(CharacterClass(characterClass, view.level_np.value))
+                    class_recyclerview.adapter = EditSpellbookRecyclerViewAdapter(this, spellbook.characterClass)
                     class_recyclerview.layoutManager= LinearLayoutManager(activity)
                     popup.dismiss()
                 }else{
@@ -97,20 +93,24 @@ class AddSpellbookFragment : Fragment() {
         create_spellbook_button.setOnClickListener {
             if(character_name_text.text.isNullOrEmpty()){
                 charactername_textInputLayout.error="Name can not be empty"
-            }else if(classes.isNullOrEmpty()){
+            }else if(spellbook.characterClass.isNullOrEmpty()){
                 class_error_text.visibility=View.VISIBLE
             }else{
-                val name=character_name_text.text.toString()
-                val book=Spellbook(0, name, classes, arrayListOf())
-                val converter=DatabaseSpellbookConverter()
-                val databasebook=converter.toDatabaseSpellbook(book)
-                spellbookViewmodel.insert(databasebook)
-                val listFragment = SpellListFragment()
+                spellbook.name=character_name_text.text.toString()
+                val converter=DatabaseSpellbookConverter(activity)
+                spellbookViewmodel.update(converter.toDatabaseSpellbook(spellbook))
+
+                val spellbookFragment = SpellbookFragment()
                 this.fragmentManager!!.beginTransaction()
-                    .replace(R.id.list_frame, listFragment)
+                    .replace(R.id.list_frame, spellbookFragment)
                     .addToBackStack(null)
                     .commit()
+                spellbookFragment.addObject(spellbook)
             }
         }
+    }
+
+    fun addObject(spellbook:Spellbook){
+        this.spellbook=spellbook
     }
 }
