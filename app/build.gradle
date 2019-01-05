@@ -109,6 +109,10 @@ dependencies {
 
     implementation 'com.android.support:multidex:1.0.3'
 
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espresso_version"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espresso_version"
+
 
 }
 
