@@ -15,6 +15,7 @@ class SpellbookSpellsRecyclerViewAdapter(private val parentActivity: SpellbookFr
     RecyclerView.Adapter<SpellbookSpellsRecyclerViewAdapter.ViewHolder>() {
 
     private val onClickListener: View.OnClickListener
+    private val onLongClickListener: View.OnLongClickListener
 
     /**
      * initializes the onclick listener that takes the user to the detail screen
@@ -23,6 +24,12 @@ class SpellbookSpellsRecyclerViewAdapter(private val parentActivity: SpellbookFr
         onClickListener = View.OnClickListener { v ->
             val item = v.tag as Spell
             parentActivity.showDetail(item)
+        }
+
+        onLongClickListener=View.OnLongClickListener { v ->
+            val item = v.tag as Spell
+            parentActivity.deleteSpell(item)
+            true
         }
     }
 
@@ -61,6 +68,7 @@ class SpellbookSpellsRecyclerViewAdapter(private val parentActivity: SpellbookFr
         with(holder.itemView) {
             tag = spell // Save the spell represented by this view
             setOnClickListener(onClickListener)
+            setOnLongClickListener(onLongClickListener)
         }
     }
 

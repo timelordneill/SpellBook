@@ -7,6 +7,7 @@ import com.example.spellbook.App
 import com.example.spellbook.domain.DatabaseSpellbook
 import com.example.spellbook.domain.Spellbook
 import com.example.spellbook.domain.SpellbookRepository
+import dagger.android.DaggerActivity
 import javax.inject.Inject
 
 class SpellbookViewModel: ViewModel() {
@@ -25,6 +26,10 @@ class SpellbookViewModel: ViewModel() {
 
     fun update(spellbook: DatabaseSpellbook){
         spellbookRepository.update(spellbook)
+    }
+
+    fun delete(spellbook: DatabaseSpellbook){
+        spellbookRepository.delete(spellbook)
     }
 
     fun deleteAll(){
