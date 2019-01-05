@@ -11,6 +11,13 @@ import com.example.spellbook.domain.CharacterClass
 import com.example.spellbook.domain.Classes
 import kotlinx.android.synthetic.main.class_list_content.view.*
 
+
+/**
+ * [ClassRecyclerViewAdapter] is used in [AddSpellbookFragment] to fill the recyclerview
+ *
+ * @param parentActivity: parent of the recyclerview that uses this adapter
+ * @param classes: [CharacterClass] that are shown in the list
+ */
 class ClassRecyclerViewAdapter(private val parentActivity: AddSpellbookFragment,
                                private val classes: List<CharacterClass>) :
     RecyclerView.Adapter<ClassRecyclerViewAdapter.ViewHolder>() {
@@ -22,6 +29,9 @@ class ClassRecyclerViewAdapter(private val parentActivity: AddSpellbookFragment,
         return ViewHolder(view)
     }
 
+    /**
+     * fills the items in the list
+     */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val characterClass = classes[position]
         holder.name.text = characterClass.name.className

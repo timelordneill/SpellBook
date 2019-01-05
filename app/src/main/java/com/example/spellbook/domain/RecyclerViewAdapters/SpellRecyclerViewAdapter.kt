@@ -6,10 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.spellbook.Fragments.SpellListFragment
+import com.example.spellbook.Fragments.SpellbookFragment
 import com.example.spellbook.R
 import com.example.spellbook.domain.Spell
 import kotlinx.android.synthetic.main.spell_list_content.view.*
 
+/**
+ * [SpellRecyclerViewAdapter] is used in [SpellListFragment] to fill the recyclerview
+ *
+ * @param parentActivity: parent of the recyclerview that uses this adapter
+ * @param spells: [Spell] that are shown in the list
+ */
 class SpellRecyclerViewAdapter(private val parentActivity: SpellListFragment,
                                private val spells: List<Spell>) :
     RecyclerView.Adapter<SpellRecyclerViewAdapter.ViewHolder>() {

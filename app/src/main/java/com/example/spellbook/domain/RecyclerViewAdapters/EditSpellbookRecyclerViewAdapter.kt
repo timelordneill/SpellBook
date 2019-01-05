@@ -13,12 +13,21 @@ import com.example.spellbook.domain.Classes
 import com.example.spellbook.domain.Spellbook
 import kotlinx.android.synthetic.main.class_list_content.view.*
 
+/**
+ * [EditSpellbookRecyclerViewAdapter] is used in [SpellbookEditFragment] to fill the recyclerview
+ *
+ * @param parentActivity: parent of the recyclerview that uses this adapter
+ * @param classes: [CharacterClass] that are shown in the list
+ */
 class EditSpellbookRecyclerViewAdapter(private val parentActivity: SpellbookEditFragment,
                                private val classes: List<CharacterClass>) :
     RecyclerView.Adapter<EditSpellbookRecyclerViewAdapter.ViewHolder>() {
 
     private val onLongClickListener: View.OnLongClickListener
 
+    /**
+     * initializes the onclick listener that deletes a class
+     */
     init {
         onLongClickListener=View.OnLongClickListener { v ->
             val item = v.tag as CharacterClass
@@ -33,6 +42,9 @@ class EditSpellbookRecyclerViewAdapter(private val parentActivity: SpellbookEdit
         return ViewHolder(view)
     }
 
+    /**
+     * fills the items in the list
+     */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val characterClass = classes[position]
         holder.name.text = characterClass.name.className

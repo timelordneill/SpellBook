@@ -5,11 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.spellbook.Fragments.SavedSpellbooksFragment
 import com.example.spellbook.Fragments.SpellbookFragment
 import com.example.spellbook.R
 import com.example.spellbook.domain.Spell
+import com.example.spellbook.domain.Spellbook
 import kotlinx.android.synthetic.main.spell_list_content.view.*
 
+/**
+ * [SpellbookSpellsRecyclerViewAdapter] is used in [SpellbookFragment] to fill the recyclerview
+ *
+ * @param parentActivity: parent of the recyclerview that uses this adapter
+ * @param spells: [Spell] that are shown in the list
+ */
 class SpellbookSpellsRecyclerViewAdapter(private val parentActivity: SpellbookFragment,
                                private val spells: List<Spell>?) :
     RecyclerView.Adapter<SpellbookSpellsRecyclerViewAdapter.ViewHolder>() {
@@ -18,7 +26,7 @@ class SpellbookSpellsRecyclerViewAdapter(private val parentActivity: SpellbookFr
     private val onLongClickListener: View.OnLongClickListener
 
     /**
-     * initializes the onclick listener that takes the user to the detail screen
+     * initializes the onclick listener that takes the user to the detail screen and deletes the spell
      */
     init {
         onClickListener = View.OnClickListener { v ->
