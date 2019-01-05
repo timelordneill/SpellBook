@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.example.spellbook.Fragments.SavedSpellbooksFragment
 import com.example.spellbook.R
 import com.example.spellbook.domain.Classes
+import com.example.spellbook.domain.DatabaseSpellbook
 import com.example.spellbook.domain.Spellbook
 import kotlinx.android.synthetic.main.spellbook_list_content.view.*
 
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.spellbook_list_content.view.*
  * @param spellbooks: [Spellbook] that are shown in the list
  */
 class SpellbookRecyclerViewAdapter(private val parentActivity: SavedSpellbooksFragment,
-                               private val spellbooks: List<Spellbook>) :
+                               private val spellbooks: List<DatabaseSpellbook>) :
     RecyclerView.Adapter<SpellbookRecyclerViewAdapter.ViewHolder>() {
 
     private val onClickListener: View.OnClickListener
@@ -29,12 +30,12 @@ class SpellbookRecyclerViewAdapter(private val parentActivity: SavedSpellbooksFr
      */
     init {
         onClickListener = View.OnClickListener { v ->
-            val item = v.tag as Spellbook
+            val item = v.tag as DatabaseSpellbook
             parentActivity.showSavedSpellbook(item)
         }
 
         onLongClickListener=View.OnLongClickListener { v ->
-            val item = v.tag as Spellbook
+            val item = v.tag as DatabaseSpellbook
             parentActivity.deleteSpellbook(item)
             true
         }
@@ -53,15 +54,16 @@ class SpellbookRecyclerViewAdapter(private val parentActivity: SavedSpellbooksFr
         val spellbook = spellbooks[position]
         holder.name.text = spellbook.name
 
-        when {
-            spellbook.characterClass[0].name== Classes.Bard -> holder.classImage.setImageResource(R.drawable.bard)
-            spellbook.characterClass[0].name== Classes.Sorcerer -> holder.classImage.setImageResource(R.drawable.sorcerer)
-            spellbook.characterClass[0].name== Classes.Cleric -> holder.classImage.setImageResource(R.drawable.cleric)
-            spellbook.characterClass[0].name== Classes.Druid -> holder.classImage.setImageResource(R.drawable.druid)
-            spellbook.characterClass[0].name== Classes.Ranger -> holder.classImage.setImageResource(R.drawable.ranger)
-            spellbook.characterClass[0].name== Classes.Paladin -> holder.classImage.setImageResource(R.drawable.paladin)
-            spellbook.characterClass[0].name== Classes.Warlock -> holder.classImage.setImageResource(R.drawable.warlock)
-            spellbook.characterClass[0].name== Classes.Wizard -> holder.classImage.setImageResource(R.drawable.wizard)
+        var characterClass=spellbook.characterClasses.split(";")[0].split(",")[0]
+        when (characterClass) {
+            "Bard" -> holder.classImage.setImageResource(R.drawable.bard)
+            "Sorcerer" -> holder.classImage.setImageResource(R.drawable.sorcerer)
+            "Cleric" -> holder.classImage.setImageResource(R.drawable.cleric)
+            "Druid" -> holder.classImage.setImageResource(R.drawable.druid)
+            "Ranger" -> holder.classImage.setImageResource(R.drawable.ranger)
+            "Paladin" -> holder.classImage.setImageResource(R.drawable.paladin)
+            "Warlock" -> holder.classImage.setImageResource(R.drawable.warlock)
+            "Wizard" -> holder.classImage.setImageResource(R.drawable.wizard)
         }
 
         with(holder.itemView) {

@@ -69,9 +69,8 @@ class SavedSpellbooksFragment : Fragment() {
         }
 
         spellbookViewmodel.allSpellbooks.observe(this, Observer {
-                val spellbooks=fromDatabaseSpellbook(it!! as MutableList<DatabaseSpellbook>)
                 spellbook_list.adapter =
-                        SpellbookRecyclerViewAdapter(this, spellbooks)
+                        SpellbookRecyclerViewAdapter(this, it!!)
                 spellbook_list.layoutManager= LinearLayoutManager(activity)
         })
     }
@@ -79,13 +78,16 @@ class SavedSpellbooksFragment : Fragment() {
     /**
      * shows the spellbook
      */
-    fun showSavedSpellbook(spellbook: Spellbook){
+    fun showSavedSpellbook(spellbook: DatabaseSpellbook){
+        val converter=DatabaseSpellbookConverter(activity)
+        val convertedBook=converter.fromDatabaseSpellbook(spellbook)
+
         val spellbookFragment = SpellbookFragment()
         this.fragmentManager!!.beginTransaction()
             .replace(R.id.list_frame, spellbookFragment)
             .addToBackStack(null)
             .commit()
-        spellbookFragment.addObject(spellbook)
+        spellbookFragment.addObject(convertedBook)
         val drawer=activity!!.drawer_layout
         drawer.closeDrawers()
 
@@ -97,19 +99,17 @@ class SavedSpellbooksFragment : Fragment() {
     /**
      * deletes [Spellbook]
      */
-    fun deleteSpellbook(spellbook: Spellbook){
+    fun deleteSpellbook(spellbook: DatabaseSpellbook){
         val alert=AlertDialog.Builder(context)
         alert.setMessage("Are you sure you want to delete this spellbook?")
         alert.setCancelable(true)
 
         alert.setPositiveButton("Yes"){dialog, which ->
-            val converter=DatabaseSpellbookConverter(activity)
-            spellbookViewmodel.delete(converter.toDatabaseSpellbook(spellbook))
+            spellbookViewmodel.delete(spellbook)
 
             spellbookViewmodel.allSpellbooks.observe(this, Observer {
-                val spellbooks=fromDatabaseSpellbook(it!! as MutableList<DatabaseSpellbook>)
                 spellbook_list.adapter =
-                        SpellbookRecyclerViewAdapter(this, spellbooks)
+                        SpellbookRecyclerViewAdapter(this, it!!)
                 spellbook_list.layoutManager= LinearLayoutManager(activity)
             })
 
@@ -122,55 +122,5 @@ class SavedSpellbooksFragment : Fragment() {
 
         val dialog=alert.create()
         dialog.show()
-    }
-
-    /**
-     * converts list of [DatabaseSpellbook] to list of [Spellbook]
-     */
-    private fun fromDatabaseSpellbook(spellbooks:MutableList<DatabaseSpellbook>):MutableList<Spellbook>{
-        val convertedSpellbooks= mutableListOf<Spellbook>()
-        spellbooks.forEach { spellbook ->
-
-            val characterClasses= mutableListOf<CharacterClass>()
-            spellbook.characterClasses.split(";").forEach {
-                val classString=it.split(",")
-                characterClasses.add(CharacterClass(stringToClasses(classString[0]),classString[1].toInt()))
-            }
-
-            if(spellbook.spells.isNotEmpty() && spellbook.spells != ""){
-                spellViewmodel.getSpells().observe(activity!!, Observer {
-                    val spellsFromString= mutableListOf<Spell>()
-                    spellbook.spells.split(";").forEach {string ->
-                        spellsFromString.add(it!!.filter { spell ->
-                            spell.name==string
-                        }[0])
-                    }
-
-                    convertedSpellbooks.add(Spellbook(spellbook.id, spellbook.name, characterClasses, spellsFromString))
-                })
-            }else{
-                convertedSpellbooks.add(Spellbook(spellbook.id, spellbook.name, characterClasses, mutableListOf()))
-            }
-        }
-
-        return convertedSpellbooks
-    }
-
-    /**
-     * converts string to [Classes]
-     */
-    private fun stringToClasses(string:String):Classes{
-        when (string) {
-            "Bard" -> return Classes.Bard
-            "Wizard" -> return Classes.Wizard
-            "Warlock" -> return Classes.Warlock
-            "Paladin" -> return Classes.Paladin
-            "Ranger" -> return Classes.Ranger
-            "Druid" -> return Classes.Druid
-            "Cleric" -> return Classes.Cleric
-            "Sorcerer" -> return Classes.Sorcerer
-        }
-
-        return Classes.Bard
     }
 }

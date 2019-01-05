@@ -1,6 +1,7 @@
 package com.example.spellbook.Fragments
 
 import android.app.ActionBar
+import android.app.AlertDialog
 import android.os.Bundle
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.widget.LinearLayoutManager
@@ -113,10 +114,32 @@ class SpellbookEditFragment : android.support.v4.app.Fragment() {
      * deteles a [CharacterClass] from [spellbook]
      */
     fun deleteClass(characterclass: CharacterClass){
-        spellbook.characterClass.remove(characterclass)
 
-        class_recyclerview.adapter = EditSpellbookRecyclerViewAdapter(this, spellbook.characterClass)
-        class_recyclerview.layoutManager= LinearLayoutManager(activity)
+        val alert= AlertDialog.Builder(context)
+        alert.setMessage("What do You want to do with this class?")
+        alert.setCancelable(true)
+
+        alert.setPositiveButton("Delete"){dialog, which ->
+            spellbook.characterClass.remove(characterclass)
+
+            class_recyclerview.adapter = EditSpellbookRecyclerViewAdapter(this, spellbook.characterClass)
+            class_recyclerview.layoutManager= LinearLayoutManager(activity)
+
+            dialog.dismiss()
+        }
+
+        alert.setNegativeButton("Level Up"){dialog, which ->
+            spellbook.characterClass.first { it == characterclass }.level+=1
+
+            class_recyclerview.adapter = EditSpellbookRecyclerViewAdapter(this, spellbook.characterClass)
+            class_recyclerview.layoutManager= LinearLayoutManager(activity)
+
+            dialog.dismiss()
+        }
+
+        val dialog=alert.create()
+        dialog.show()
+
     }
 
     /**
