@@ -19,11 +19,7 @@ import android.widget.ArrayAdapter
 import com.example.spellbook.domain.RecyclerViewAdapters.SpellRecyclerViewAdapter
 
 /**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [SpellListFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- *
+ * [SpellListFragment] shows a list of all spells. This is the first fragment shown when the app starts
  */
 class SpellListFragment : Fragment() {
 
@@ -46,6 +42,9 @@ class SpellListFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_spell_list, container, false)
     }
 
+    /**
+     * gets spells from web api and puts them in the list
+     */
     override fun onStart() {
         super.onStart()
 
@@ -58,6 +57,9 @@ class SpellListFragment : Fragment() {
         spell_list.layoutManager= LinearLayoutManager(activity)
     }
 
+    /**
+     * shows detail screen of a spell
+     */
     fun showDetail(spell: Spell){
         val detailFragment = SpellDetailFragment()
         this.fragmentManager!!.beginTransaction()
@@ -67,6 +69,9 @@ class SpellListFragment : Fragment() {
         detailFragment.addObject(spell)
     }
 
+    /**
+     * initializes the options menu and handels the searching and filtering
+     */
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
 
         inflater!!.inflate(R.menu.listfragmentmenu, menu)

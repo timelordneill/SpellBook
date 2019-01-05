@@ -25,6 +25,9 @@ import com.example.spellbook.ui.SpellbookViewModel
 import kotlinx.android.synthetic.main.fragment_spellbook_edit.*
 import kotlinx.android.synthetic.main.popup_add_class.view.*
 
+/**
+ * [SpellbookEditFragment] edits the name and characterclasses of a [Spellbook]
+ */
 class SpellbookEditFragment : android.support.v4.app.Fragment() {
 
     private lateinit var spellbook:Spellbook
@@ -110,6 +113,9 @@ class SpellbookEditFragment : android.support.v4.app.Fragment() {
         }
     }
 
+    /**
+     * deteles a [CharacterClass] from [spellbook]
+     */
     fun deleteClass(characterclass: CharacterClass){
         spellbook.characterClass.remove(characterclass)
 
@@ -117,6 +123,9 @@ class SpellbookEditFragment : android.support.v4.app.Fragment() {
         class_recyclerview.layoutManager= LinearLayoutManager(activity)
     }
 
+    /**
+     * adds [Spellbook] to the fragment
+     */
     fun addObject(spellbook:Spellbook){
         this.spellbook=spellbook
     }

@@ -10,6 +10,9 @@ import com.example.spellbook.domain.Spell
 import kotlinx.android.synthetic.main.fragment_spell_detail.*
 import kotlinx.android.synthetic.main.fragment_spell_detail.view.*
 
+/**
+ * [SpellDetailFragment] shows the details of a spell
+ */
 class SpellDetailFragment : android.support.v4.app.Fragment() {
 
     private lateinit var spell: Spell
@@ -50,6 +53,9 @@ class SpellDetailFragment : android.support.v4.app.Fragment() {
         }
     }
 
+    /**
+     * adds spell to fragment
+     */
     fun addObject(item: Spell){
         this.spell = item
     }
