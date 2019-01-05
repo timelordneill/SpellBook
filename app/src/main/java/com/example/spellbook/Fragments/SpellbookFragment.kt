@@ -15,6 +15,7 @@ import com.example.spellbook.domain.*
 import com.example.spellbook.domain.RecyclerViewAdapters.SpellRecyclerViewAdapter
 import com.example.spellbook.domain.RecyclerViewAdapters.SpellbookSpellsRecyclerViewAdapter
 import com.example.spellbook.ui.SpellbookViewModel
+import com.example.spellbook.utils.twoPane
 import kotlinx.android.synthetic.main.fragment_add_spell.*
 import kotlinx.android.synthetic.main.fragment_spell_list.*
 
@@ -55,11 +56,19 @@ class SpellbookFragment : android.support.v4.app.Fragment() {
      */
     fun showDetail(spell: Spell){
         val detailFragment = SpellDetailFragment()
-        this.fragmentManager!!.beginTransaction()
-            .replace(R.id.list_frame, detailFragment)
-            .addToBackStack(null)
-            .commit()
-        detailFragment.addObject(spell)
+        if(twoPane){
+            this.fragmentManager!!.beginTransaction()
+                .replace(R.id.detail_frame, detailFragment)
+                .addToBackStack(null)
+                .commit()
+            detailFragment.addObject(spell)
+        }else{
+            this.fragmentManager!!.beginTransaction()
+                .replace(R.id.list_frame, detailFragment)
+                .addToBackStack(null)
+                .commit()
+            detailFragment.addObject(spell)
+        }
     }
 
     /**

@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.Spinner
 import android.widget.ArrayAdapter
 import com.example.spellbook.domain.RecyclerViewAdapters.SpellRecyclerViewAdapter
+import com.example.spellbook.utils.twoPane
 
 /**
  * [SpellListFragment] shows a list of all spells. This is the first fragment shown when the app starts
@@ -62,11 +63,19 @@ class SpellListFragment : Fragment() {
      */
     fun showDetail(spell: Spell){
         val detailFragment = SpellDetailFragment()
-        this.fragmentManager!!.beginTransaction()
-            .replace(R.id.list_frame, detailFragment)
-            .addToBackStack(null)
-            .commit()
-        detailFragment.addObject(spell)
+        if(twoPane){
+            this.fragmentManager!!.beginTransaction()
+                .replace(R.id.detail_frame, detailFragment)
+                .addToBackStack(null)
+                .commit()
+            detailFragment.addObject(spell)
+        }else{
+            this.fragmentManager!!.beginTransaction()
+                .replace(R.id.list_frame, detailFragment)
+                .addToBackStack(null)
+                .commit()
+            detailFragment.addObject(spell)
+        }
     }
 
     /**

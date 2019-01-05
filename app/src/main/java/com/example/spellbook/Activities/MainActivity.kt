@@ -10,11 +10,11 @@ import android.view.MenuItem
 import com.example.spellbook.Fragments.SavedSpellbooksFragment
 import com.example.spellbook.Fragments.SpellListFragment
 import com.example.spellbook.R
+import com.example.spellbook.utils.twoPane
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private var twoPane: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

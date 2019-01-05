@@ -94,6 +94,7 @@ class AddSpellbookFragment : Fragment() {
 
         add_class_button.setOnClickListener {
             popup.showAsDropDown(spellbook_constraint, 10, 10)
+            popup.update(50, 50, 400, 500)
         }
 
         create_spellbook_button.setOnClickListener {

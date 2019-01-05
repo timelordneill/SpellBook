@@ -16,6 +16,7 @@ import com.example.spellbook.domain.*
 import com.example.spellbook.domain.RecyclerViewAdapters.SpellbookRecyclerViewAdapter
 import com.example.spellbook.ui.SpellViewmodel
 import com.example.spellbook.ui.SpellbookViewModel
+import com.example.spellbook.utils.twoPane
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_saved_spellbooks.*
 
@@ -63,6 +64,10 @@ class SavedSpellbooksFragment : Fragment() {
 
             val drawer=activity!!.drawer_layout
             drawer.closeDrawers()
+
+            if(twoPane){
+                activity!!.detail_frame.removeAllViews()
+            }
         }
 
         spellbookViewmodel.allSpellbooks.observe(this, Observer {
@@ -85,6 +90,10 @@ class SavedSpellbooksFragment : Fragment() {
         spellbookFragment.addObject(spellbook)
         val drawer=activity!!.drawer_layout
         drawer.closeDrawers()
+
+        if(twoPane){
+            activity!!.detail_frame.removeAllViews()
+        }
     }
 
     /**
