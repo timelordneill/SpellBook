@@ -10,12 +10,22 @@ import com.example.spellbook.Fragments.SpellbookEditFragment
 import com.example.spellbook.R
 import com.example.spellbook.domain.CharacterClass
 import com.example.spellbook.domain.Classes
+import com.example.spellbook.domain.Spellbook
 import kotlinx.android.synthetic.main.class_list_content.view.*
 
 class EditSpellbookRecyclerViewAdapter(private val parentActivity: SpellbookEditFragment,
                                private val classes: List<CharacterClass>) :
     RecyclerView.Adapter<EditSpellbookRecyclerViewAdapter.ViewHolder>() {
 
+    private val onLongClickListener: View.OnLongClickListener
+
+    init {
+        onLongClickListener=View.OnLongClickListener { v ->
+            val item = v.tag as CharacterClass
+            parentActivity.deleteClass(item)
+            true
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -37,6 +47,11 @@ class EditSpellbookRecyclerViewAdapter(private val parentActivity: SpellbookEdit
             characterClass.name == Classes.Paladin -> holder.classImage.setImageResource(R.drawable.paladin)
             characterClass.name == Classes.Warlock -> holder.classImage.setImageResource(R.drawable.warlock)
             characterClass.name == Classes.Wizard -> holder.classImage.setImageResource(R.drawable.wizard)
+        }
+
+        with(holder.itemView) {
+            tag = characterClass
+            setOnLongClickListener(onLongClickListener)
         }
     }
 
