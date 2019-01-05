@@ -110,6 +110,13 @@ class SpellbookEditFragment : android.support.v4.app.Fragment() {
         }
     }
 
+    fun deleteClass(characterclass: CharacterClass){
+        spellbook.characterClass.remove(characterclass)
+
+        class_recyclerview.adapter = EditSpellbookRecyclerViewAdapter(this, spellbook.characterClass)
+        class_recyclerview.layoutManager= LinearLayoutManager(activity)
+    }
+
     fun addObject(spellbook:Spellbook){
         this.spellbook=spellbook
     }
