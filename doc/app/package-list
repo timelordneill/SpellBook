@@ -1,0 +1,15 @@
+$dokka.format:html
+$dokka.linkExtension:html
+
+com.example.spellbook
+com.example.spellbook.Activities
+com.example.spellbook.Fragments
+com.example.spellbook.base
+com.example.spellbook.database
+com.example.spellbook.domain
+com.example.spellbook.domain.RecyclerViewAdapters
+com.example.spellbook.injection.component
+com.example.spellbook.injection.module
+com.example.spellbook.network
+com.example.spellbook.ui
+com.example.spellbook.utils

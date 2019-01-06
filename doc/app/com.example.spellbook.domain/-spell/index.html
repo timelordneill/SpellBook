@@ -1,0 +1,177 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Spell - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.example.spellbook.domain</a>&nbsp;/&nbsp;<a href="./index.html">Spell</a><br/>
+<br/>
+<h1>Spell</h1>
+<code><span class="keyword">class </span><span class="identifier">Spell</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/os/Parcelable.html"><span class="identifier">Parcelable</span></a></code>
+<p><a href="./index.html">Spell</a> represents the spells a character can cast</p>
+<h3>Parameters</h3>
+<p><a name="name"></a>
+<code>name</code> - : name of the spell</p>
+<p><a name="description"></a>
+<code>description</code> - : description of the spell</p>
+<p><a name="range"></a>
+<code>range</code> - : casting range of the spell</p>
+<p><a name="components"></a>
+<code>components</code> - : components needed to cast the spell</p>
+<p><a name="ritual"></a>
+<code>ritual</code> - : tells if this spell can be cast as a ritual</p>
+<p><a name="duration"></a>
+<code>duration</code> - : duration of the spell</p>
+<p><a name="concentration"></a>
+<code>concentration</code> - : tells if concentration is needed to cast the spell</p>
+<p><a name="casting_time"></a>
+<code>casting_time</code> - : time needed to cast the spell</p>
+<p><a name="level"></a>
+<code>level</code> - : level of the spell</p>
+<p><a name="school"></a>
+<code>school</code> - : spell school of the spell</p>
+<p><a name="classes"></a>
+<code>classes</code> - : classes that are abel to cast the spell</p>
+<p><a name="tags"></a>
+<code>tags</code> - : tags for easy searching</p>
+<p><a name="type"></a>
+<code>type</code> - : string with spell info</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">Spell</span><span class="symbol">(</span><span class="identifier" id="com.example.spellbook.domain.Spell$<init>(kotlin.String, kotlin.String, kotlin.String, com.example.spellbook.domain.Components, kotlin.Boolean, kotlin.String, kotlin.Boolean, kotlin.String, kotlin.String, kotlin.String, kotlin.collections.List((kotlin.String)), kotlin.collections.List((kotlin.String)), kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.example.spellbook.domain.Spell$<init>(kotlin.String, kotlin.String, kotlin.String, com.example.spellbook.domain.Components, kotlin.Boolean, kotlin.String, kotlin.Boolean, kotlin.String, kotlin.String, kotlin.String, kotlin.collections.List((kotlin.String)), kotlin.collections.List((kotlin.String)), kotlin.String)/description">description</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.example.spellbook.domain.Spell$<init>(kotlin.String, kotlin.String, kotlin.String, com.example.spellbook.domain.Components, kotlin.Boolean, kotlin.String, kotlin.Boolean, kotlin.String, kotlin.String, kotlin.String, kotlin.collections.List((kotlin.String)), kotlin.collections.List((kotlin.String)), kotlin.String)/range">range</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.example.spellbook.domain.Spell$<init>(kotlin.String, kotlin.String, kotlin.String, com.example.spellbook.domain.Components, kotlin.Boolean, kotlin.String, kotlin.Boolean, kotlin.String, kotlin.String, kotlin.String, kotlin.collections.List((kotlin.String)), kotlin.collections.List((kotlin.String)), kotlin.String)/components">components</span><span class="symbol">:</span>&nbsp;<a href="../-components/index.html"><span class="identifier">Components</span></a><span class="symbol">, </span><span class="identifier" id="com.example.spellbook.domain.Spell$<init>(kotlin.String, kotlin.String, kotlin.String, com.example.spellbook.domain.Components, kotlin.Boolean, kotlin.String, kotlin.Boolean, kotlin.String, kotlin.String, kotlin.String, kotlin.collections.List((kotlin.String)), kotlin.collections.List((kotlin.String)), kotlin.String)/ritual">ritual</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="com.example.spellbook.domain.Spell$<init>(kotlin.String, kotlin.String, kotlin.String, com.example.spellbook.domain.Components, kotlin.Boolean, kotlin.String, kotlin.Boolean, kotlin.String, kotlin.String, kotlin.String, kotlin.collections.List((kotlin.String)), kotlin.collections.List((kotlin.String)), kotlin.String)/duration">duration</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.example.spellbook.domain.Spell$<init>(kotlin.String, kotlin.String, kotlin.String, com.example.spellbook.domain.Components, kotlin.Boolean, kotlin.String, kotlin.Boolean, kotlin.String, kotlin.String, kotlin.String, kotlin.collections.List((kotlin.String)), kotlin.collections.List((kotlin.String)), kotlin.String)/concentration">concentration</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="com.example.spellbook.domain.Spell$<init>(kotlin.String, kotlin.String, kotlin.String, com.example.spellbook.domain.Components, kotlin.Boolean, kotlin.String, kotlin.Boolean, kotlin.String, kotlin.String, kotlin.String, kotlin.collections.List((kotlin.String)), kotlin.collections.List((kotlin.String)), kotlin.String)/casting_time">casting_time</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.example.spellbook.domain.Spell$<init>(kotlin.String, kotlin.String, kotlin.String, com.example.spellbook.domain.Components, kotlin.Boolean, kotlin.String, kotlin.Boolean, kotlin.String, kotlin.String, kotlin.String, kotlin.collections.List((kotlin.String)), kotlin.collections.List((kotlin.String)), kotlin.String)/level">level</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.example.spellbook.domain.Spell$<init>(kotlin.String, kotlin.String, kotlin.String, com.example.spellbook.domain.Components, kotlin.Boolean, kotlin.String, kotlin.Boolean, kotlin.String, kotlin.String, kotlin.String, kotlin.collections.List((kotlin.String)), kotlin.collections.List((kotlin.String)), kotlin.String)/school">school</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.example.spellbook.domain.Spell$<init>(kotlin.String, kotlin.String, kotlin.String, com.example.spellbook.domain.Components, kotlin.Boolean, kotlin.String, kotlin.Boolean, kotlin.String, kotlin.String, kotlin.String, kotlin.collections.List((kotlin.String)), kotlin.collections.List((kotlin.String)), kotlin.String)/classes">classes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.example.spellbook.domain.Spell$<init>(kotlin.String, kotlin.String, kotlin.String, com.example.spellbook.domain.Components, kotlin.Boolean, kotlin.String, kotlin.Boolean, kotlin.String, kotlin.String, kotlin.String, kotlin.collections.List((kotlin.String)), kotlin.collections.List((kotlin.String)), kotlin.String)/tags">tags</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.example.spellbook.domain.Spell$<init>(kotlin.String, kotlin.String, kotlin.String, com.example.spellbook.domain.Components, kotlin.Boolean, kotlin.String, kotlin.Boolean, kotlin.String, kotlin.String, kotlin.String, kotlin.collections.List((kotlin.String)), kotlin.collections.List((kotlin.String)), kotlin.String)/type">type</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span></code>
+<p><a href="./index.html">Spell</a> represents the spells a character can cast</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="casting_time.html">casting_time</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">casting_time</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>: time needed to cast the spell</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="classes.html">classes</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">classes</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p>: classes that are abel to cast the spell</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="components.html">components</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">components</span><span class="symbol">: </span><a href="../-components/index.html"><span class="identifier">Components</span></a></code>
+<p>: components needed to cast the spell</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="concentration.html">concentration</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">concentration</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>: tells if concentration is needed to cast the spell</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="description.html">description</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">description</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>: description of the spell</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="duration.html">duration</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">duration</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>: duration of the spell</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="level.html">level</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">level</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>: level of the spell</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="name.html">name</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">name</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>: name of the spell</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="range.html">range</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">range</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>: casting range of the spell</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="ritual.html">ritual</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">ritual</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>: tells if this spell can be cast as a ritual</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="school.html">school</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">school</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>: spell school of the spell</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="tags.html">tags</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">tags</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p>: tags for easy searching</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="type.html">type</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">type</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>: string with spell info</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
