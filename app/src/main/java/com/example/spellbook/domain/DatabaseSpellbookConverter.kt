@@ -7,10 +7,13 @@ import com.example.spellbook.ui.SpellViewmodel
 import com.example.spellbook.ui.SpellbookViewModel
 
 /**
- * [DatabaseSpellbookConverter] converts [Spellbook] to [DatabaseSpellbook]
+ * [DatabaseSpellbookConverter] converts [Spellbook] to [DatabaseSpellbook] and vice versa
  */
 class DatabaseSpellbookConverter(val activity:FragmentActivity? = null){
 
+    /**
+     * Converts a [Spellbook] to a [DatabaseSpellbook] for local storage
+     */
     fun toDatabaseSpellbook(spellbook:Spellbook):DatabaseSpellbook{
         var classes=""
         spellbook.characterClass.forEach {
@@ -27,6 +30,9 @@ class DatabaseSpellbookConverter(val activity:FragmentActivity? = null){
         return DatabaseSpellbook(spellbook.id, spellbook.name, classes, spells)
     }
 
+    /**
+     * converts a locally stored [DatabaseSpellbook] back to a [Spellbook]
+     */
     fun fromDatabaseSpellbook(spellbook:DatabaseSpellbook):Spellbook{
         val spellViewmodel = ViewModelProviders.of(activity!!).get(SpellViewmodel::class.java)
         var convertedBook=Spellbook(spellbook.id, spellbook.name, mutableListOf(), mutableListOf())
@@ -55,6 +61,9 @@ class DatabaseSpellbookConverter(val activity:FragmentActivity? = null){
         return convertedBook
     }
 
+    /**
+     * Converts [List] of [DatabaseSpellbook] to a [MutableList] of [Spellbook]
+     */
     fun fromDatabaseSpellbooks(spellbooks:MutableList<DatabaseSpellbook>):MutableList<Spellbook>{
         val spellViewmodel = ViewModelProviders.of(activity!!).get(SpellViewmodel::class.java)
         val convertedSpellbooks= mutableListOf<Spellbook>()

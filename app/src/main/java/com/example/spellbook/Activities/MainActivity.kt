@@ -13,9 +13,16 @@ import com.example.spellbook.R
 import com.example.spellbook.utils.twoPane
 import kotlinx.android.synthetic.main.activity_main.*
 
+/**
+ * [MainActivity] is the activity in which all the fragments are loaded.
+ */
 class MainActivity : AppCompatActivity() {
 
-
+    /**
+     * Sets the global variable [twoPane] to true on tablets.
+     * Sets the correct toolbar and configures the menu button for the nav drawer and fills the drawer
+     * Sets the list as fragment when app is first started
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -44,11 +51,17 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
+    /**
+     * Sets the toolbar title to fals
+     */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         return true
     }
 
+    /**
+     * Expands the nav drawer when menu button is clicked
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val mDrawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
         return when (item.itemId) {

@@ -7,6 +7,9 @@ import com.example.spellbook.domain.DatabaseSpellbook
 import com.example.spellbook.domain.SpellbookRepository
 import javax.inject.Inject
 
+/**
+ * Viewmodel used by fragment to get locally stored [DatabaseSpellbook]
+ */
 class SpellbookViewModel: ViewModel() {
     @Inject
     lateinit var spellbookRepository: SpellbookRepository

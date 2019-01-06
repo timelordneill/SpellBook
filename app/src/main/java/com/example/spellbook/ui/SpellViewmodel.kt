@@ -10,6 +10,9 @@ import io.reactivex.schedulers.Schedulers
 import com.orhanobut.logger.Logger
 import javax.inject.Inject
 
+/**
+ * Viewmodel that gets [Spell] from RestAPI
+ */
 class SpellViewmodel : InjectedViewModel(){
 
     private val spells = MutableLiveData<List<Spell>>()

@@ -36,6 +36,9 @@ class SpellbookEditFragment : android.support.v4.app.Fragment() {
         return inflater.inflate(R.layout.fragment_spellbook_edit, container, false)
     }
 
+    /**
+     * Sets adapters and clicklisteners
+     */
     override fun onStart() {
         super.onStart()
 

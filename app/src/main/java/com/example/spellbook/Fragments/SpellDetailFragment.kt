@@ -17,6 +17,9 @@ class SpellDetailFragment : android.support.v4.app.Fragment() {
 
     private lateinit var spell: Spell
 
+    /**
+     * Fills textboxes with [Spell] text
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +41,9 @@ class SpellDetailFragment : android.support.v4.app.Fragment() {
         return rootView
     }
 
+    /**
+     * SEts clicklistener to [AddSpellFragment]
+     */
     override fun onStart() {
         super.onStart()
         add_button.setOnClickListener {

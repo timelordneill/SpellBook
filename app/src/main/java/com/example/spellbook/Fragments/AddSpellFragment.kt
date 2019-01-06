@@ -31,6 +31,9 @@ class AddSpellFragment : android.support.v4.app.Fragment() {
         return inflater.inflate(R.layout.fragment_add_spell, container, false)
     }
 
+    /**
+     * Adds adapter to recyclerview and checks if spellbooks are correct class
+     */
     override fun onStart() {
         super.onStart()
 
@@ -74,8 +77,4 @@ class AddSpellFragment : android.support.v4.app.Fragment() {
             .commit()
         spellbookFragment.addObject(spellbook)
     }
-
-    /**
-     * Converts [DatabaseSpellbook] to [Spellbook]
-     */
 }

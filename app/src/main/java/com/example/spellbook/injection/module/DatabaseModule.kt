@@ -9,6 +9,9 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
+/**
+ * Module that provides [SpellbookRepository], [SpellbookDao] and [SpellbookDatabase]
+ */
 @Module
 class DatabaseModule(private val application: Application) {
     @Provides

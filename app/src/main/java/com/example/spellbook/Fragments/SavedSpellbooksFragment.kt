@@ -38,6 +38,9 @@ class SavedSpellbooksFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_saved_spellbooks, container, false)
     }
 
+    /**
+     * Adds adapter to recyclerview and clicklisteners to buttons
+     */
     override fun onStart() {
         super.onStart()
 
@@ -97,7 +100,7 @@ class SavedSpellbooksFragment : Fragment() {
     }
 
     /**
-     * deletes [Spellbook]
+     * deletes or levels up the [CharacterClass] [Spellbook]
      */
     fun deleteSpellbook(spellbook: DatabaseSpellbook){
         val alert=AlertDialog.Builder(context)

@@ -39,6 +39,9 @@ class AddSpellbookFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_add_spellbook, container, false)
     }
 
+    /**
+     * Set the adapters and clicklisteners
+     */
     override fun onStart() {
         super.onStart()
 
@@ -118,6 +121,9 @@ class AddSpellbookFragment : Fragment() {
         }
     }
 
+    /**
+     * Dismissed the popup when fragment is closed
+     */
     override fun onDetach() {
         super.onDetach()
         popup.dismiss()

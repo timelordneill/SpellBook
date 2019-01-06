@@ -32,6 +32,9 @@ class SpellbookFragment : android.support.v4.app.Fragment() {
         return inflater.inflate(R.layout.fragment_spellbook, container, false)
     }
 
+    /**
+     * sets adapter
+     */
     override fun onStart() {
         super.onStart()
 
@@ -129,6 +132,9 @@ class SpellbookFragment : android.support.v4.app.Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    /**
+     * Sets click listener to edit button
+     */
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.itemId){
             R.id.spellbook_edit -> {
@@ -139,6 +145,9 @@ class SpellbookFragment : android.support.v4.app.Fragment() {
         }
     }
 
+    /**
+     * takes user to [SpellbookEditFragment]
+     */
     fun showEdit(){
         val editFragment = SpellbookEditFragment()
         this.fragmentManager!!.beginTransaction()
