@@ -12,6 +12,7 @@ Add character spellbooks , with multiclassing capabilities
 
 ![Saved Spellbooks List](https://github.com/HoGentTIN/native-apps-1-android-creative-app-timelordneill/blob/master/README%20images/Screenshot_20190106-132157.jpg)
 
+Spellbooks and Spells in Spêllbooks can be deleted with a long press on the item
 ## Author
 
 * **Neill Wauters**
